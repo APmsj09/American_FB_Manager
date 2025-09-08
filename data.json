@@ -1,0 +1,3918 @@
+{
+    "state": {
+        "currentYear": 2025,
+        "weeksSimulated": 0,
+        "userTeamId": "pro_team_0",
+        "teamBudget": 5000000,
+        "gameState": "regularSeason",
+        "draftRound": 1,
+        "draftPick": 1
+    },
+    "teams": [
+        {
+            "id": "pro_team_0",
+            "name": "Falcons",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_1",
+            "name": "Bills",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_2",
+            "name": "Panthers",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_3",
+            "name": "Bears",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_4",
+            "name": "Bengals",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_5",
+            "name": "Browns",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_6",
+            "name": "Cowboys",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_7",
+            "name": "Broncos",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_8",
+            "name": "Lions",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_9",
+            "name": "Packers",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_10",
+            "name": "Texans",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_11",
+            "name": "Colts",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_12",
+            "name": "Jaguars",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_13",
+            "name": "Chiefs",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_14",
+            "name": "Raiders",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_15",
+            "name": "Chargers",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_16",
+            "name": "Rams",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_17",
+            "name": "Dolphins",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_18",
+            "name": "Vikings",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_19",
+            "name": "Patriots",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_20",
+            "name": "Saints",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_21",
+            "name": "Giants",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_22",
+            "name": "Jets",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_23",
+            "name": "Eagles",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_24",
+            "name": "Steelers",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_25",
+            "name": "49ers",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_26",
+            "name": "Seahawks",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_27",
+            "name": "Buccaneers",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_28",
+            "name": "Titans",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_29",
+            "name": "Commanders",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_30",
+            "name": "Ravens",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "pro_team_31",
+            "name": "Cardinals",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "pro"
+        },
+        {
+            "id": "college_team_0",
+            "name": "Alabama Crimson Tide",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_1",
+            "name": "Ohio State Buckeyes",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_2",
+            "name": "Georgia Bulldogs",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_3",
+            "name": "Clemson Tigers",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_4",
+            "name": "USC Trojans",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_5",
+            "name": "LSU Tigers",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_6",
+            "name": "Oklahoma Sooners",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_7",
+            "name": "Michigan Wolverines",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_8",
+            "name": "Texas Longhorns",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_9",
+            "name": "Notre Dame Fighting Irish",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_10",
+            "name": "College Team 10",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_11",
+            "name": "College Team 11",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_12",
+            "name": "College Team 12",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_13",
+            "name": "College Team 13",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_14",
+            "name": "College Team 14",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_15",
+            "name": "College Team 15",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_16",
+            "name": "College Team 16",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_17",
+            "name": "College Team 17",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_18",
+            "name": "College Team 18",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_19",
+            "name": "College Team 19",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_20",
+            "name": "College Team 20",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_21",
+            "name": "College Team 21",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_22",
+            "name": "College Team 22",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_23",
+            "name": "College Team 23",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_24",
+            "name": "College Team 24",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_25",
+            "name": "College Team 25",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_26",
+            "name": "College Team 26",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_27",
+            "name": "College Team 27",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_28",
+            "name": "College Team 28",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_29",
+            "name": "College Team 29",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_30",
+            "name": "College Team 30",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_31",
+            "name": "College Team 31",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_32",
+            "name": "College Team 32",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_33",
+            "name": "College Team 33",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_34",
+            "name": "College Team 34",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_35",
+            "name": "College Team 35",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_36",
+            "name": "College Team 36",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_37",
+            "name": "College Team 37",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_38",
+            "name": "College Team 38",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_39",
+            "name": "College Team 39",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_40",
+            "name": "College Team 40",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_41",
+            "name": "College Team 41",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_42",
+            "name": "College Team 42",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_43",
+            "name": "College Team 43",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_44",
+            "name": "College Team 44",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_45",
+            "name": "College Team 45",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_46",
+            "name": "College Team 46",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_47",
+            "name": "College Team 47",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_48",
+            "name": "College Team 48",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_49",
+            "name": "College Team 49",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_50",
+            "name": "College Team 50",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_51",
+            "name": "College Team 51",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_52",
+            "name": "College Team 52",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_53",
+            "name": "College Team 53",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_54",
+            "name": "College Team 54",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_55",
+            "name": "College Team 55",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_56",
+            "name": "College Team 56",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_57",
+            "name": "College Team 57",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_58",
+            "name": "College Team 58",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_59",
+            "name": "College Team 59",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_60",
+            "name": "College Team 60",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_61",
+            "name": "College Team 61",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_62",
+            "name": "College Team 62",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_63",
+            "name": "College Team 63",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_64",
+            "name": "College Team 64",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_65",
+            "name": "College Team 65",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_66",
+            "name": "College Team 66",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_67",
+            "name": "College Team 67",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_68",
+            "name": "College Team 68",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_69",
+            "name": "College Team 69",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_70",
+            "name": "College Team 70",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_71",
+            "name": "College Team 71",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_72",
+            "name": "College Team 72",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_73",
+            "name": "College Team 73",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_74",
+            "name": "College Team 74",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_75",
+            "name": "College Team 75",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_76",
+            "name": "College Team 76",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_77",
+            "name": "College Team 77",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_78",
+            "name": "College Team 78",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_79",
+            "name": "College Team 79",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_80",
+            "name": "College Team 80",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_81",
+            "name": "College Team 81",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_82",
+            "name": "College Team 82",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_83",
+            "name": "College Team 83",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_84",
+            "name": "College Team 84",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_85",
+            "name": "College Team 85",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_86",
+            "name": "College Team 86",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_87",
+            "name": "College Team 87",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_88",
+            "name": "College Team 88",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_89",
+            "name": "College Team 89",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_90",
+            "name": "College Team 90",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_91",
+            "name": "College Team 91",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_92",
+            "name": "College Team 92",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_93",
+            "name": "College Team 93",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_94",
+            "name": "College Team 94",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_95",
+            "name": "College Team 95",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_96",
+            "name": "College Team 96",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_97",
+            "name": "College Team 97",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_98",
+            "name": "College Team 98",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_99",
+            "name": "College Team 99",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_100",
+            "name": "College Team 100",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_101",
+            "name": "College Team 101",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_102",
+            "name": "College Team 102",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_103",
+            "name": "College Team 103",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_104",
+            "name": "College Team 104",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_105",
+            "name": "College Team 105",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_106",
+            "name": "College Team 106",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_107",
+            "name": "College Team 107",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_108",
+            "name": "College Team 108",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_109",
+            "name": "College Team 109",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_110",
+            "name": "College Team 110",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_111",
+            "name": "College Team 111",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_112",
+            "name": "College Team 112",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_113",
+            "name": "College Team 113",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_114",
+            "name": "College Team 114",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_115",
+            "name": "College Team 115",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_116",
+            "name": "College Team 116",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_117",
+            "name": "College Team 117",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_118",
+            "name": "College Team 118",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_119",
+            "name": "College Team 119",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_120",
+            "name": "College Team 120",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_121",
+            "name": "College Team 121",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_122",
+            "name": "College Team 122",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_123",
+            "name": "College Team 123",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_124",
+            "name": "College Team 124",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_125",
+            "name": "College Team 125",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_126",
+            "name": "College Team 126",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "college_team_127",
+            "name": "College Team 127",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "college"
+        },
+        {
+            "id": "hs_team_0",
+            "name": "Mater Dei Monarchs",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_1",
+            "name": "St. John Bosco Braves",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_2",
+            "name": "IMG Academy Ascenders",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_3",
+            "name": "Bishop Gorman Gaels",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_4",
+            "name": "North Shore Mustangs",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_5",
+            "name": "HS Team 5",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_6",
+            "name": "HS Team 6",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_7",
+            "name": "HS Team 7",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_8",
+            "name": "HS Team 8",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_9",
+            "name": "HS Team 9",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_10",
+            "name": "HS Team 10",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_11",
+            "name": "HS Team 11",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_12",
+            "name": "HS Team 12",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_13",
+            "name": "HS Team 13",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_14",
+            "name": "HS Team 14",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_15",
+            "name": "HS Team 15",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_16",
+            "name": "HS Team 16",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_17",
+            "name": "HS Team 17",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_18",
+            "name": "HS Team 18",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_19",
+            "name": "HS Team 19",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_20",
+            "name": "HS Team 20",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_21",
+            "name": "HS Team 21",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_22",
+            "name": "HS Team 22",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_23",
+            "name": "HS Team 23",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_24",
+            "name": "HS Team 24",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_25",
+            "name": "HS Team 25",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_26",
+            "name": "HS Team 26",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_27",
+            "name": "HS Team 27",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_28",
+            "name": "HS Team 28",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_29",
+            "name": "HS Team 29",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_30",
+            "name": "HS Team 30",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_31",
+            "name": "HS Team 31",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_32",
+            "name": "HS Team 32",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_33",
+            "name": "HS Team 33",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_34",
+            "name": "HS Team 34",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_35",
+            "name": "HS Team 35",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_36",
+            "name": "HS Team 36",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_37",
+            "name": "HS Team 37",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_38",
+            "name": "HS Team 38",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_39",
+            "name": "HS Team 39",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_40",
+            "name": "HS Team 40",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_41",
+            "name": "HS Team 41",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_42",
+            "name": "HS Team 42",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_43",
+            "name": "HS Team 43",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_44",
+            "name": "HS Team 44",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_45",
+            "name": "HS Team 45",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_46",
+            "name": "HS Team 46",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_47",
+            "name": "HS Team 47",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_48",
+            "name": "HS Team 48",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_49",
+            "name": "HS Team 49",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_50",
+            "name": "HS Team 50",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_51",
+            "name": "HS Team 51",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_52",
+            "name": "HS Team 52",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_53",
+            "name": "HS Team 53",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_54",
+            "name": "HS Team 54",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_55",
+            "name": "HS Team 55",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_56",
+            "name": "HS Team 56",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_57",
+            "name": "HS Team 57",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_58",
+            "name": "HS Team 58",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_59",
+            "name": "HS Team 59",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_60",
+            "name": "HS Team 60",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_61",
+            "name": "HS Team 61",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_62",
+            "name": "HS Team 62",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_63",
+            "name": "HS Team 63",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_64",
+            "name": "HS Team 64",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_65",
+            "name": "HS Team 65",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_66",
+            "name": "HS Team 66",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_67",
+            "name": "HS Team 67",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_68",
+            "name": "HS Team 68",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_69",
+            "name": "HS Team 69",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_70",
+            "name": "HS Team 70",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_71",
+            "name": "HS Team 71",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_72",
+            "name": "HS Team 72",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_73",
+            "name": "HS Team 73",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_74",
+            "name": "HS Team 74",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_75",
+            "name": "HS Team 75",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_76",
+            "name": "HS Team 76",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_77",
+            "name": "HS Team 77",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_78",
+            "name": "HS Team 78",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_79",
+            "name": "HS Team 79",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_80",
+            "name": "HS Team 80",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_81",
+            "name": "HS Team 81",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_82",
+            "name": "HS Team 82",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_83",
+            "name": "HS Team 83",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_84",
+            "name": "HS Team 84",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_85",
+            "name": "HS Team 85",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_86",
+            "name": "HS Team 86",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_87",
+            "name": "HS Team 87",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_88",
+            "name": "HS Team 88",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_89",
+            "name": "HS Team 89",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_90",
+            "name": "HS Team 90",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_91",
+            "name": "HS Team 91",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_92",
+            "name": "HS Team 92",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_93",
+            "name": "HS Team 93",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_94",
+            "name": "HS Team 94",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_95",
+            "name": "HS Team 95",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_96",
+            "name": "HS Team 96",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_97",
+            "name": "HS Team 97",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_98",
+            "name": "HS Team 98",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_99",
+            "name": "HS Team 99",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_100",
+            "name": "HS Team 100",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_101",
+            "name": "HS Team 101",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_102",
+            "name": "HS Team 102",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_103",
+            "name": "HS Team 103",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_104",
+            "name": "HS Team 104",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_105",
+            "name": "HS Team 105",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_106",
+            "name": "HS Team 106",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_107",
+            "name": "HS Team 107",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_108",
+            "name": "HS Team 108",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_109",
+            "name": "HS Team 109",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_110",
+            "name": "HS Team 110",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_111",
+            "name": "HS Team 111",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_112",
+            "name": "HS Team 112",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_113",
+            "name": "HS Team 113",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_114",
+            "name": "HS Team 114",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_115",
+            "name": "HS Team 115",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_116",
+            "name": "HS Team 116",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_117",
+            "name": "HS Team 117",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_118",
+            "name": "HS Team 118",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_119",
+            "name": "HS Team 119",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_120",
+            "name": "HS Team 120",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_121",
+            "name": "HS Team 121",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_122",
+            "name": "HS Team 122",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_123",
+            "name": "HS Team 123",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_124",
+            "name": "HS Team 124",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_125",
+            "name": "HS Team 125",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_126",
+            "name": "HS Team 126",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_127",
+            "name": "HS Team 127",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_128",
+            "name": "HS Team 128",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_129",
+            "name": "HS Team 129",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_130",
+            "name": "HS Team 130",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_131",
+            "name": "HS Team 131",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_132",
+            "name": "HS Team 132",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_133",
+            "name": "HS Team 133",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_134",
+            "name": "HS Team 134",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_135",
+            "name": "HS Team 135",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_136",
+            "name": "HS Team 136",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_137",
+            "name": "HS Team 137",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_138",
+            "name": "HS Team 138",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_139",
+            "name": "HS Team 139",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_140",
+            "name": "HS Team 140",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_141",
+            "name": "HS Team 141",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_142",
+            "name": "HS Team 142",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_143",
+            "name": "HS Team 143",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_144",
+            "name": "HS Team 144",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_145",
+            "name": "HS Team 145",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_146",
+            "name": "HS Team 146",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_147",
+            "name": "HS Team 147",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_148",
+            "name": "HS Team 148",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_149",
+            "name": "HS Team 149",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_150",
+            "name": "HS Team 150",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_151",
+            "name": "HS Team 151",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_152",
+            "name": "HS Team 152",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_153",
+            "name": "HS Team 153",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_154",
+            "name": "HS Team 154",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_155",
+            "name": "HS Team 155",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_156",
+            "name": "HS Team 156",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_157",
+            "name": "HS Team 157",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_158",
+            "name": "HS Team 158",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_159",
+            "name": "HS Team 159",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_160",
+            "name": "HS Team 160",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_161",
+            "name": "HS Team 161",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_162",
+            "name": "HS Team 162",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_163",
+            "name": "HS Team 163",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_164",
+            "name": "HS Team 164",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_165",
+            "name": "HS Team 165",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_166",
+            "name": "HS Team 166",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_167",
+            "name": "HS Team 167",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_168",
+            "name": "HS Team 168",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_169",
+            "name": "HS Team 169",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_170",
+            "name": "HS Team 170",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_171",
+            "name": "HS Team 171",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_172",
+            "name": "HS Team 172",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_173",
+            "name": "HS Team 173",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_174",
+            "name": "HS Team 174",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_175",
+            "name": "HS Team 175",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_176",
+            "name": "HS Team 176",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_177",
+            "name": "HS Team 177",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_178",
+            "name": "HS Team 178",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_179",
+            "name": "HS Team 179",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_180",
+            "name": "HS Team 180",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_181",
+            "name": "HS Team 181",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_182",
+            "name": "HS Team 182",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_183",
+            "name": "HS Team 183",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_184",
+            "name": "HS Team 184",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_185",
+            "name": "HS Team 185",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_186",
+            "name": "HS Team 186",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_187",
+            "name": "HS Team 187",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_188",
+            "name": "HS Team 188",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_189",
+            "name": "HS Team 189",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_190",
+            "name": "HS Team 190",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_191",
+            "name": "HS Team 191",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_192",
+            "name": "HS Team 192",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_193",
+            "name": "HS Team 193",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_194",
+            "name": "HS Team 194",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_195",
+            "name": "HS Team 195",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_196",
+            "name": "HS Team 196",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_197",
+            "name": "HS Team 197",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_198",
+            "name": "HS Team 198",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_199",
+            "name": "HS Team 199",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_200",
+            "name": "HS Team 200",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_201",
+            "name": "HS Team 201",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_202",
+            "name": "HS Team 202",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_203",
+            "name": "HS Team 203",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_204",
+            "name": "HS Team 204",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_205",
+            "name": "HS Team 205",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_206",
+            "name": "HS Team 206",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_207",
+            "name": "HS Team 207",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_208",
+            "name": "HS Team 208",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_209",
+            "name": "HS Team 209",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_210",
+            "name": "HS Team 210",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_211",
+            "name": "HS Team 211",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_212",
+            "name": "HS Team 212",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_213",
+            "name": "HS Team 213",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_214",
+            "name": "HS Team 214",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_215",
+            "name": "HS Team 215",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_216",
+            "name": "HS Team 216",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_217",
+            "name": "HS Team 217",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_218",
+            "name": "HS Team 218",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_219",
+            "name": "HS Team 219",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_220",
+            "name": "HS Team 220",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_221",
+            "name": "HS Team 221",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_222",
+            "name": "HS Team 222",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_223",
+            "name": "HS Team 223",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_224",
+            "name": "HS Team 224",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_225",
+            "name": "HS Team 225",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_226",
+            "name": "HS Team 226",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_227",
+            "name": "HS Team 227",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_228",
+            "name": "HS Team 228",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_229",
+            "name": "HS Team 229",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_230",
+            "name": "HS Team 230",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_231",
+            "name": "HS Team 231",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_232",
+            "name": "HS Team 232",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_233",
+            "name": "HS Team 233",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_234",
+            "name": "HS Team 234",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_235",
+            "name": "HS Team 235",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_236",
+            "name": "HS Team 236",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_237",
+            "name": "HS Team 237",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_238",
+            "name": "HS Team 238",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_239",
+            "name": "HS Team 239",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_240",
+            "name": "HS Team 240",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_241",
+            "name": "HS Team 241",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_242",
+            "name": "HS Team 242",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_243",
+            "name": "HS Team 243",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_244",
+            "name": "HS Team 244",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_245",
+            "name": "HS Team 245",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_246",
+            "name": "HS Team 246",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_247",
+            "name": "HS Team 247",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_248",
+            "name": "HS Team 248",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_249",
+            "name": "HS Team 249",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_250",
+            "name": "HS Team 250",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_251",
+            "name": "HS Team 251",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_252",
+            "name": "HS Team 252",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_253",
+            "name": "HS Team 253",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_254",
+            "name": "HS Team 254",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        },
+        {
+            "id": "hs_team_255",
+            "name": "HS Team 255",
+            "wins": 0,
+            "losses": 0,
+            "ties": 0,
+            "league": "highschool"
+        }
+    ],
+    "players": [
+        {
+            "name": "Player 0",
+            "position": "QB",
+            "age": 25,
+            "potential": 93,
+            "teamId": "pro_team_1",
+            "league": "pro",
+            "attributes": {
+                "physical": {
+                    "strength": 78,
+                    "speed": 82,
+                    "endurance": 72,
+                    "agility": 75
+                },
+                "mental": {
+                    "awareness": 85,
+                    "leadership": 88,
+                    "determination": 90,
+                    "tenacity": 84
+                },
+                "technical": {
+                    "accuracy": 92,
+                    "arm_strength": 95,
+                    "play_action": 88
+                }
+            },
+            "salary": 750000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 1",
+            "position": "RB",
+            "age": 28,
+            "potential": 85,
+            "teamId": "pro_team_1",
+            "league": "pro",
+            "attributes": {
+                "physical": {
+                    "strength": 88,
+                    "speed": 91,
+                    "endurance": 85,
+                    "agility": 89
+                },
+                "mental": {
+                    "awareness": 75,
+                    "leadership": 70,
+                    "determination": 80,
+                    "tenacity": 78
+                },
+                "technical": {
+                    "elusiveness": 89,
+                    "breaking_tackles": 92,
+                    "vision": 85
+                }
+            },
+            "salary": 980000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 2",
+            "position": "WR",
+            "age": 23,
+            "potential": 98,
+            "teamId": "pro_team_0",
+            "league": "pro",
+            "attributes": {
+                "physical": {
+                    "strength": 75,
+                    "speed": 95,
+                    "endurance": 88,
+                    "agility": 92
+                },
+                "mental": {
+                    "awareness": 80,
+                    "leadership": 82,
+                    "determination": 95,
+                    "tenacity": 90
+                },
+                "technical": {
+                    "route_running": 95,
+                    "catching": 98,
+                    "jumping": 90
+                }
+            },
+            "salary": 850000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 3",
+            "position": "TE",
+            "age": 30,
+            "potential": 75,
+            "teamId": "pro_team_2",
+            "league": "pro",
+            "attributes": {
+                "physical": {
+                    "strength": 90,
+                    "speed": 80,
+                    "endurance": 85,
+                    "agility": 82
+                },
+                "mental": {
+                    "awareness": 88,
+                    "leadership": 80,
+                    "determination": 75,
+                    "tenacity": 80
+                },
+                "technical": {
+                    "blocking": 92,
+                    "catching": 78,
+                    "route_running": 70
+                }
+            },
+            "salary": 650000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 4",
+            "position": "OL",
+            "age": 27,
+            "potential": 88,
+            "teamId": "pro_team_3",
+            "league": "pro",
+            "attributes": {
+                "physical": {
+                    "strength": 95,
+                    "speed": 70,
+                    "endurance": 90,
+                    "agility": 65
+                },
+                "mental": {
+                    "awareness": 90,
+                    "leadership": 85,
+                    "determination": 92,
+                    "tenacity": 88
+                },
+                "technical": {
+                    "pass_block": 92,
+                    "run_block": 95
+                }
+            },
+            "salary": 900000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 5",
+            "position": "DL",
+            "age": 29,
+            "potential": 82,
+            "teamId": "pro_team_4",
+            "league": "pro",
+            "attributes": {
+                "physical": {
+                    "strength": 92,
+                    "speed": 75,
+                    "endurance": 88,
+                    "agility": 70
+                },
+                "mental": {
+                    "awareness": 85,
+                    "leadership": 80,
+                    "determination": 88,
+                    "tenacity": 90
+                },
+                "technical": {
+                    "pass_rush_moves": 85,
+                    "tackling": 90
+                }
+            },
+            "salary": 720000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 6",
+            "position": "LB",
+            "age": 26,
+            "potential": 91,
+            "teamId": "pro_team_5",
+            "league": "pro",
+            "attributes": {
+                "physical": {
+                    "strength": 88,
+                    "speed": 85,
+                    "endurance": 92,
+                    "agility": 88
+                },
+                "mental": {
+                    "awareness": 92,
+                    "leadership": 90,
+                    "determination": 95,
+                    "tenacity": 91
+                },
+                "technical": {
+                    "tackling": 95,
+                    "coverage": 85,
+                    "block_shedding": 90
+                }
+            },
+            "salary": 990000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 7",
+            "position": "DB",
+            "age": 24,
+            "potential": 95,
+            "teamId": "pro_team_6",
+            "league": "pro",
+            "attributes": {
+                "physical": {
+                    "strength": 70,
+                    "speed": 98,
+                    "endurance": 90,
+                    "agility": 95
+                },
+                "mental": {
+                    "awareness": 90,
+                    "leadership": 85,
+                    "determination": 92,
+                    "tenacity": 88
+                },
+                "technical": {
+                    "man_coverage": 95,
+                    "zone_coverage": 90,
+                    "tackling": 80
+                }
+            },
+            "salary": 870000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 8",
+            "position": "QB",
+            "age": 22,
+            "potential": 90,
+            "teamId": "pro_team_7",
+            "league": "pro",
+            "attributes": {
+                "physical": {
+                    "strength": 75,
+                    "speed": 80,
+                    "endurance": 70,
+                    "agility": 72
+                },
+                "mental": {
+                    "awareness": 82,
+                    "leadership": 85,
+                    "determination": 88,
+                    "tenacity": 80
+                },
+                "technical": {
+                    "accuracy": 88,
+                    "arm_strength": 90,
+                    "play_action": 85
+                }
+            },
+            "salary": 600000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 9",
+            "position": "WR",
+            "age": 17,
+            "potential": 99,
+            "teamId": null,
+            "league": "highschool",
+            "attributes": {
+                "physical": {
+                    "strength": 45,
+                    "speed": 85,
+                    "endurance": 60,
+                    "agility": 75
+                },
+                "mental": {
+                    "awareness": 35,
+                    "leadership": 40,
+                    "determination": 70,
+                    "tenacity": 55
+                },
+                "technical": {
+                    "route_running": 50,
+                    "catching": 65,
+                    "jumping": 55
+                }
+            },
+            "salary": 700000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 10",
+            "position": "LB",
+            "age": 18,
+            "potential": 88,
+            "teamId": null,
+            "league": "highschool",
+            "attributes": {
+                "physical": {
+                    "strength": 55,
+                    "speed": 65,
+                    "endurance": 70,
+                    "agility": 60
+                },
+                "mental": {
+                    "awareness": 50,
+                    "leadership": 55,
+                    "determination": 65,
+                    "tenacity": 60
+                },
+                "technical": {
+                    "tackling": 70,
+                    "coverage": 55,
+                    "block_shedding": 60
+                }
+            },
+            "salary": 600000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 11",
+            "position": "DB",
+            "age": 20,
+            "potential": 92,
+            "teamId": null,
+            "league": "college",
+            "attributes": {
+                "physical": {
+                    "strength": 65,
+                    "speed": 88,
+                    "endurance": 80,
+                    "agility": 85
+                },
+                "mental": {
+                    "awareness": 75,
+                    "leadership": 70,
+                    "determination": 85,
+                    "tenacity": 80
+                },
+                "technical": {
+                    "man_coverage": 85,
+                    "zone_coverage": 80,
+                    "tackling": 70
+                }
+            },
+            "salary": 800000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        },
+        {
+            "name": "Player 12",
+            "position": "QB",
+            "age": 21,
+            "potential": 95,
+            "teamId": null,
+            "league": "college",
+            "attributes": {
+                "physical": {
+                    "strength": 80,
+                    "speed": 85,
+                    "endurance": 75,
+                    "agility": 78
+                },
+                "mental": {
+                    "awareness": 88,
+                    "leadership": 90,
+                    "determination": 92,
+                    "tenacity": 85
+                },
+                "technical": {
+                    "accuracy": 90,
+                    "arm_strength": 92,
+                    "play_action": 88
+                }
+            },
+            "salary": 950000,
+            "stats": {
+                "games": 0,
+                "tackles": 0,
+                "sacks": 0,
+                "interceptions": 0,
+                "passingYards": 0,
+                "passingTDs": 0,
+                "rushingYards": 0,
+                "rushingTDs": 0,
+                "receivingYards": 0,
+                "receivingTDs": 0
+            }
+        }
+    ],
+    "staff": [
+        {
+            "name": "Staff 0",
+            "role": "Head Coach",
+            "teamId": "pro_team_0",
+            "skills": {
+                "management": 90,
+                "leadership": 85
+            },
+            "salary": 450000
+        },
+        {
+            "name": "Staff 1",
+            "role": "Offensive Coordinator",
+            "teamId": "pro_team_0",
+            "skills": {
+                "scheme": 88
+            },
+            "salary": 380000
+        },
+        {
+            "name": "Staff 2",
+            "role": "Defensive Coordinator",
+            "teamId": "pro_team_0",
+            "skills": {
+                "scheme": 92
+            },
+            "salary": 400000
+        },
+        {
+            "name": "Staff 3",
+            "role": "QB Coach",
+            "teamId": "pro_team_0",
+            "skills": {
+                "development": 85
+            },
+            "salary": 250000
+        },
+        {
+            "name": "Staff 4",
+            "role": "RB Coach",
+            "teamId": null,
+            "skills": {
+                "development": 75
+            },
+            "salary": 200000
+        },
+        {
+            "name": "Staff 5",
+            "role": "WR Coach",
+            "teamId": null,
+            "skills": {
+                "development": 90
+            },
+            "salary": 280000
+        }
+    ]
+}
