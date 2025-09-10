@@ -55,7 +55,18 @@
             text-shadow: 0 0 5px #00ff00;
         }
         .btn {
-            @apply px-4 py-2 rounded-lg font-bold transition-transform transform hover:scale-105;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition-property: transform;
+            transition-duration: 150ms;
+            transform: none;
+        }
+        .btn:hover {
+            transform: scale(1.05);
         }
         .modal-backdrop {
             background-color: rgba(0, 0, 0, 0.75);
@@ -145,7 +156,19 @@
                     <p id="userTeam" class="text-sm text-gray-400"></p>
                     <p id="teamBudget" class="text-sm text-gray-400 mt-1"></p>
                 </div>
-                <button id="simulateBtn" class="btn bg-green-600 hover:bg-green-700">Simulate Week</button>
+                <div class="flex gap-4">
+                    <button onclick="advanceWeek()" 
+                            class="btn bg-green-600 hover:bg-green-700">
+                        Advance Week
+                    </button>
+                    <button onclick="simMultipleWeeks(4)" 
+                            class="btn bg-blue-600 hover:bg-blue-700">
+                        Sim Month
+                    </button>
+                    <div class="text-xl">
+                        Week: ${state.weeksSimulated} | Year: ${state.currentYear}
+                    </div>
+                </div>
             </div>
             <div id="viewContainer" class="w-full">
                 <!-- Dynamic content will be loaded here -->
@@ -185,482 +208,41 @@
 
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, onSnapshot, collection, query, addDoc, getDocs, updateDoc, deleteDoc, where, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { GameState } from './js/gameState.js';
+        import { LeagueInitializer } from './js/leagueInit.js';
+        import { GameLoop } from './js/gameLoop.js';
 
-        // Firebase Global Variables
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        let state = GameState.load();
 
-        let app;
-        let auth;
-        let db;
-        let userId;
-
-        // Game State Variables
-        const state = {
-            view: 'home',
-            gameState: 'regularSeason', // 'regularSeason', 'offseason'
-            currentYear: 2025,
-            weeksSimulated: 0,
-            userTeamId: 'user_team',
-            teamBudget: 5000000,
+        // Initialize new game
+        async function startNewGame(leagueType) {
+            state = GameState.reset();
+            const { teams, players } = LeagueInitializer.initializeLeague(leagueType);
             
-            // In-memory data
-            players: [],
-            highSchoolPlayers: [],
-            collegePlayers: [],
-            teams: [],
-            staff: [],
-            availableStaff: [],
-            draftPool: [],
-            historicalSeasons: [],
+            state.teams = teams;
+            state.players = players;
+            state.leagueType = leagueType;
+            state.userTeamId = teams[0].id;
+            state.gameState = 'playing';
             
-            draftRound: 1,
-            draftPick: 1,
-            leagues: {
-                pro: { name: 'Pro League', teams: 32 },
-                college: { name: 'College League', teams: 128 },
-                highschool: { name: 'High School League', teams: 256 }
-            }
-        };
-
-        const positions = ['QB', 'RB', 'WR', 'TE', 'OL', 'DL', 'LB', 'DB'];
-        const teamNames = [
-            'Falcons', 'Bills', 'Panthers', 'Bears', 'Bengals', 'Browns', 'Cowboys', 'Broncos',
-            'Lions', 'Packers', 'Texans', 'Colts', 'Jaguars', 'Chiefs', 'Raiders', 'Chargers',
-            'Rams', 'Dolphins', 'Vikings', 'Patriots', 'Saints', 'Giants', 'Jets', 'Eagles',
-            'Steelers', '49ers', 'Seahawks', 'Buccaneers', 'Titans', 'Commanders', 'Ravens', 'Cardinals'
-        ];
-        const staffRoles = ['Head Coach', 'Offensive Coordinator', 'Defensive Coordinator', 'QB Coach', 'RB Coach', 'WR Coach', 'TE Coach', 'OL Coach', 'DL Coach', 'DB Coach'];
-
-        // --- Firebase Initialization ---
-        const initializeFirebase = async () => {
-            try {
-                if (Object.keys(firebaseConfig).length > 0) {
-                    app = initializeApp(firebaseConfig);
-                    auth = getAuth(app);
-                    db = getFirestore(app);
-                    document.getElementById('loadingScreen').classList.add('hidden');
-                    document.getElementById('startScreen').classList.remove('hidden');
-                } else {
-                    console.error("Firebase config is missing. Cannot initialize Firestore.");
-                    document.getElementById('loadingScreen').classList.add('hidden');
-                    document.getElementById('startScreen').classList.remove('hidden');
-                }
-            } catch (error) {
-                console.error("Error initializing Firebase:", error);
-                document.getElementById('loadingScreen').classList.add('hidden');
-            }
-        };
-
-        const handleAuthentication = async () => {
-            try {
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-                onAuthStateChanged(auth, async (user) => {
-                    if (user) {
-                        userId = user.uid;
-                        console.log("User signed in with ID:", userId);
-                    } else {
-                        console.log("No user is signed in.");
-                        userId = null;
-                    }
-                });
-            } catch (error) {
-                console.error("Authentication failed:", error);
-            }
-        };
-
-        // --- Data Models and Generators ---
-        class Player {
-            constructor(name, position, age, potential, teamId, league) {
-                this.name = name;
-                this.position = position;
-                this.age = age;
-                this.potential = potential;
-                this.teamId = teamId;
-                this.league = league;
-                this.attributes = this.generateAttributes(league);
-                this.salary = Math.floor(Math.random() * 1000000) + 500000;
-                this.stats = {
-                    games: 0, tackles: 0, sacks: 0, interceptions: 0, passingYards: 0,
-                    passingTDs: 0, rushingYards: 0, rushingTDs: 0, receivingYards: 0, receivingTDs: 0
-                };
-            }
-
-            generateAttributes(league) {
-                const baseRating = league === 'highschool' ? 20 : (league === 'college' ? 40 : 60);
-                const randomRange = league === 'highschool' ? 40 : (league === 'college' ? 30 : 20);
-            
-                const generateStat = () => Math.floor(Math.random() * randomRange) + baseRating;
-            
-                const attributes = {
-                    physical: {
-                        strength: generateStat(), speed: generateStat(), endurance: generateStat(), agility: generateStat()
-                    },
-                    mental: {
-                        awareness: generateStat(), leadership: generateStat(), determination: generateStat(), tenacity: generateStat()
-                    },
-                    technical: {}
-                };
-            
-                switch(this.position) {
-                    case 'QB':
-                        attributes.technical.accuracy = generateStat();
-                        attributes.technical.arm_strength = generateStat();
-                        attributes.technical.play_action = generateStat();
-                        break;
-                    case 'RB':
-                        attributes.technical.elusiveness = generateStat();
-                        attributes.technical.breaking_tackles = generateStat();
-                        attributes.technical.vision = generateStat();
-                        break;
-                    case 'WR':
-                        attributes.technical.route_running = generateStat();
-                        attributes.technical.catching = generateStat();
-                        attributes.technical.jumping = generateStat();
-                        break;
-                    case 'TE':
-                        attributes.technical.blocking = generateStat();
-                        attributes.technical.catching = generateStat();
-                        attributes.technical.route_running = generateStat();
-                        break;
-                    case 'OL':
-                        attributes.technical.pass_block = generateStat();
-                        attributes.technical.run_block = generateStat();
-                        break;
-                    case 'DL':
-                        attributes.technical.pass_rush_moves = generateStat();
-                        attributes.technical.tackling = generateStat();
-                        break;
-                    case 'LB':
-                        attributes.technical.tackling = generateStat();
-                        attributes.technical.coverage = generateStat();
-                        attributes.technical.block_shedding = generateStat();
-                        break;
-                    case 'DB':
-                        attributes.technical.man_coverage = generateStat();
-                        attributes.technical.zone_coverage = generateStat();
-                        attributes.technical.tackling = generateStat();
-                        break;
-                }
-            
-                return attributes;
-            }
-
-            getOverallRating() {
-                const physicalTotal = Object.values(this.attributes.physical).reduce((sum, val) => sum + val, 0);
-                const mentalTotal = Object.values(this.attributes.mental).reduce((sum, val) => sum + val, 0);
-                const technicalTotal = Object.values(this.attributes.technical).reduce((sum, val) => sum + val, 0);
-            
-                let overall = 0;
-            
-                switch(this.position) {
-                    case 'QB':
-                        overall = (physicalTotal * 0.2) + (mentalTotal * 0.3) + (technicalTotal * 0.5);
-                        break;
-                    case 'RB':
-                        overall = (physicalTotal * 0.4) + (mentalTotal * 0.2) + (technicalTotal * 0.4);
-                        break;
-                    case 'WR':
-                        overall = (physicalTotal * 0.3) + (mentalTotal * 0.2) + (technicalTotal * 0.5);
-                        break;
-                    case 'TE':
-                        overall = (physicalTotal * 0.3) + (mentalTotal * 0.2) + (technicalTotal * 0.5);
-                        break;
-                    case 'OL':
-                        overall = (physicalTotal * 0.5) + (mentalTotal * 0.3) + (technicalTotal * 0.2);
-                        break;
-                    case 'DL':
-                        overall = (physicalTotal * 0.4) + (mentalTotal * 0.2) + (technicalTotal * 0.4);
-                        break;
-                    case 'LB':
-                        overall = (physicalTotal * 0.3) + (mentalTotal * 0.3) + (technicalTotal * 0.4);
-                        break;
-                    case 'DB':
-                        overall = (physicalTotal * 0.3) + (mentalTotal * 0.2) + (technicalTotal * 0.5);
-                        break;
-                    default:
-                        overall = (physicalTotal + mentalTotal + technicalTotal) / 10;
-                        break;
-                }
-            
-                return Math.floor(overall);
-            }
+            GameState.save(state);
+            renderUI();
         }
 
-        class Staff {
-            constructor(name, role, teamId) {
-                this.name = name;
-                this.role = role;
-                this.teamId = teamId;
-                this.skills = this.generateSkills();
-                this.salary = Math.floor(Math.random() * 500000) + 100000;
-            }
-
-            generateSkills() {
-                const skills = {};
-                if (this.role === 'Head Coach') {
-                    skills.management = Math.floor(Math.random() * 50) + 50;
-                    skills.leadership = Math.floor(Math.random() * 50) + 50;
-                } else if (this.role.includes('Coordinator')) {
-                    skills.scheme = Math.floor(Math.random() * 50) + 50;
-                } else {
-                    skills.development = Math.floor(Math.random() * 50) + 50;
-                }
-                return skills;
-            }
+        // Week simulation
+        async function advanceWeek() {
+            state = await GameLoop.advanceWeek(state);
+            renderUI();
         }
 
-        const generateTeams = (numTeams, leagueName) => {
-            const teams = [];
-            const shuffledNames = teamNames.sort(() => 0.5 - Math.random());
-            for (let i = 0; i < numTeams; i++) {
-                teams.push({
-                    id: `${leagueName}_team_${i}`,
-                    name: shuffledNames[i] || `${leagueName} Team ${i}`,
-                    wins: 0,
-                    losses: 0,
-                    ties: 0
-                });
+        // Multiple week simulation
+        async function simMultipleWeeks(weeks) {
+            for (let i = 0; i < weeks; i++) {
+                if (state.currentWeek >= 17) break;
+                state = await GameLoop.advanceWeek(state);
             }
-            return teams;
-        };
-        
-        const generatePlayers = (numPlayers, ageRange, league) => {
-            const players = [];
-            for (let i = 0; i < numPlayers; i++) {
-                const name = `Player ${i}`;
-                const position = positions[Math.floor(Math.random() * positions.length)];
-                const potential = Math.floor(Math.random() * 100) + 1;
-                const age = Math.floor(Math.random() * (ageRange[1] - ageRange[0] + 1)) + ageRange[0];
-                players.push(new Player(name, position, age, potential, null, league));
-            }
-            return players;
-        };
-
-        const generateStaff = (numStaff) => {
-            const staff = [];
-            const shuffledRoles = staffRoles.sort(() => 0.5 - Math.random());
-            for (let i = 0; i < numStaff; i++) {
-                const role = shuffledRoles[i % shuffledRoles.length];
-                staff.push(new Staff(`Staff ${i}`, role, null));
-            }
-            return staff;
-        };
-        
-        const generateDraftPool = () => {
-            const draftEligiblePlayers = state.collegePlayers.filter(p => p.age >= 21 || p.getOverallRating() > 85);
-            state.draftPool = draftEligiblePlayers.sort((a, b) => b.potential - a.potential).slice(0, 200);
-        };
-
-        // --- Game Simulation and Logic ---
-        const simulateGame = (team1, team2) => {
-            const getTeamRating = (teamId) => {
-                const teamPlayers = state.players.filter(p => p.teamId === teamId);
-                if (teamPlayers.length === 0) return 0;
-                return teamPlayers.reduce((sum, p) => sum + p.getOverallRating(), 0) / teamPlayers.length;
-            };
-
-            const team1Doc = state.teams.find(t => t.id === team1);
-            const team2Doc = state.teams.find(t => t.id === team2);
-            if (!team1Doc || !team2Doc) return;
-
-            const rating1 = getTeamRating(team1);
-            const rating2 = getTeamRating(team2);
-            const ratingDifference = rating1 - rating2;
-
-            const baseScore1 = Math.floor(Math.random() * 30) + 10;
-            const baseScore2 = Math.floor(Math.random() * 30) + 10;
-
-            const score1 = Math.max(0, baseScore1 + Math.round(ratingDifference / 5));
-            const score2 = Math.max(0, baseScore2 - Math.round(ratingDifference / 5));
-
-            if (score1 > score2) {
-                team1Doc.wins++;
-                team2Doc.losses++;
-            } else if (score2 > score1) {
-                team2Doc.wins++;
-                team1Doc.losses++;
-            } else {
-                team1Doc.ties++;
-                team2Doc.ties++;
-            }
-        };
-
-        const simulateSeason = async () => {
-            // Pay salaries
-            const playerSalaryTotal = state.players.filter(p => p.teamId === state.userTeamId).reduce((sum, p) => sum + p.salary, 0);
-            const staffSalaryTotal = state.staff.filter(s => s.teamId === state.userTeamId).reduce((sum, s) => sum + s.salary, 0);
-            state.teamBudget -= playerSalaryTotal + staffSalaryTotal;
-
-            // Simulate games
-            for (let i = 0; i < state.teams.length; i++) {
-                for (let j = i + 1; j < state.teams.length; j++) {
-                    simulateGame(state.teams[i].id, state.teams[j].id);
-                }
-            }
-            await saveTeams();
-        };
-
-        const progressPlayers = async () => {
-            const batch = writeBatch(db);
-            
-            // Progress Pro, College, and High School players
-            const allPlayers = [...state.players, ...state.collegePlayers, ...state.highSchoolPlayers];
-            allPlayers.forEach(p => {
-                p.age++;
-                if (p.age < 28) {
-                    const improvement = Math.random() * (p.potential / 100) * (p.league === 'highschool' ? 20 : (p.league === 'college' ? 15 : 10));
-                    for (const category in p.attributes) {
-                        for (const attr in p.attributes[category]) {
-                            p.attributes[category][attr] = Math.min(100, p.attributes[category][attr] + improvement);
-                        }
-                    }
-                }
-                const playerRef = doc(db, playersPath(), p.id);
-                batch.update(playerRef, { attributes: p.attributes, age: p.age });
-            });
-            await batch.commit();
-        };
-
-        const enterOffseason = async () => {
-            state.gameState = 'offseason';
-            state.weeksSimulated = 0;
-            await saveGameState();
-
-            await progressPlayers();
-            await recordSeasonHistory();
-            await handlePlayerAgingAndRetirement();
-            await handleCollegeRecruitment();
-            generateDraftPool();
-            await saveDraftPool();
-            
-            state.view = 'draft';
             renderUI();
-        };
-
-        const recordSeasonHistory = async () => {
-            const seasonStats = {
-                year: state.currentYear,
-                standings: state.teams.sort((a, b) => (b.wins - b.losses) - (a.wins - a.losses)).map(t => ({
-                    id: t.id,
-                    name: t.name,
-                    wins: t.wins,
-                    losses: t.losses,
-                    ties: t.ties
-                }))
-            };
-            await addDoc(collection(db, historyPath()), seasonStats);
-        };
-
-        const handlePlayerAgingAndRetirement = async () => {
-            const batch = writeBatch(db);
-            state.players = state.players.filter(p => {
-                const retireChance = p.age > 35 ? (p.age - 35) * 0.15 : 0;
-                if (Math.random() < retireChance) {
-                    batch.delete(doc(db, playersPath(), p.id));
-                    return false;
-                }
-                return true;
-            });
-            await batch.commit();
-            await savePlayers();
-        };
-
-        const handleCollegeRecruitment = async () => {
-            const newHighSchoolPlayers = generatePlayers(state.leagues.highschool.teams * 25, [17, 18], 'highschool');
-            const newCollegePlayers = state.highSchoolPlayers.filter(p => p.age >= 18);
-
-            const batch = writeBatch(db);
-            // Move players to college
-            newCollegePlayers.forEach(p => {
-                const playerRef = doc(db, playersPath(), p.id);
-                batch.update(playerRef, { league: 'college' });
-            });
-            // Add new high school players
-            newHighSchoolPlayers.forEach(p => {
-                batch.add(collection(db, playersPath()), { ...p });
-            });
-            await batch.commit();
-        };
-        
-        const simulateDraftPick = async () => {
-            if (state.draftPool.length === 0) {
-                alert("The draft is over! Starting next season.");
-                await startNextSeason();
-                return;
-            }
-            
-            const numTeams = state.teams.length;
-            const teamsInDraftOrder = [...state.teams].sort((a, b) => a.wins - b.wins);
-
-            while (state.draftPick <= numTeams && state.draftPool.length > 0) {
-                const currentTeam = teamsInDraftOrder[state.draftPick - 1];
-                if (currentTeam.id === state.userTeamId) {
-                    return;
-                }
-
-                const pickedPlayer = state.draftPool.shift();
-                pickedPlayer.teamId = currentTeam.id;
-                pickedPlayer.league = 'pro';
-                await updateDoc(doc(db, playersPath(), pickedPlayer.id), { teamId: pickedPlayer.teamId, league: 'pro' });
-                await saveDraftPool();
-                state.draftPick++;
-                renderUI();
-                await new Promise(resolve => setTimeout(resolve, 100));
-            }
-            
-            if (state.draftPick > numTeams) {
-                state.draftRound++;
-                state.draftPick = 1;
-                if (state.draftRound > 7) {
-                    alert("The draft is over! Starting next season.");
-                    await startNextSeason();
-                    return;
-                }
-            }
-            await saveGameState();
-            renderUI();
-        };
-
-        const startNextSeason = async () => {
-            state.currentYear++;
-            state.gameState = 'regularSeason';
-            state.weeksSimulated = 0;
-            // Reset team stats
-            state.teams.forEach(t => {
-                t.wins = 0;
-                t.losses = 0;
-                t.ties = 0;
-            });
-            await saveGameState();
-            await saveTeams();
-            state.view = 'home';
-            renderUI();
-        };
-
-        const draftPlayer = async (playerId) => {
-            const playerIndex = state.draftPool.findIndex(p => p.id === playerId);
-            if (playerIndex === -1) {
-                alert("This player is no longer available.");
-                return;
-            }
-        
-            const draftedPlayer = state.draftPool.splice(playerIndex, 1)[0];
-            await updateDoc(doc(db, playersPath(), draftedPlayer.id), { teamId: state.userTeamId, league: 'pro' });
-            state.draftPick++;
-        
-            await saveDraftPool();
-            await saveGameState();
-            await simulateDraftPick();
-        };
+        }
 
         // --- UI Rendering ---
         const renderUI = () => {
@@ -1147,32 +729,38 @@
         const draftPoolPath = () => `artifacts/${appId}/users/${userId}/draftPool`;
         const historyPath = () => `artifacts/${appId}/users/${userId}/historicalSeasons`;
         
+        // --- Local Storage Data Operations ---
         const saveGameState = async () => {
-            if (!db || !userId) return;
             try {
-                await setDoc(doc(db, gameDataPath()), {
-                    currentYear: state.currentYear,
-                    weeksSimulated: state.weeksSimulated,
-                    userTeamId: state.userTeamId,
-                    teamBudget: state.teamBudget,
-                    gameState: state.gameState,
-                    draftRound: state.draftRound,
-                    draftPick: state.draftPick,
-                });
-                console.log("Game state saved.");
+                localStorage.setItem('gameState', JSON.stringify(state));
+                console.log("Game state saved locally.");
             } catch (error) {
-                console.error("Failed to save game state:", error);
+                console.error("Error saving game state:", error);
             }
         };
 
+        const loadGameState = async () => {
+            try {
+                const savedState = localStorage.getItem('gameState');
+                if (savedState) {
+                    Object.assign(state, JSON.parse(savedState));
+                    console.log("Game state loaded from local storage.");
+                    renderUI();
+                } else {
+                    console.warn("No saved game state found.");
+                }
+            } catch (error) {
+                console.error("Failed to load game state:", error);
+            }
+        };
+
+        // Repeat similar for teams, players, staff, etc.
         const saveTeams = async () => {
-            if (!db || !userId) return;
-            const batch = writeBatch(db);
-            state.teams.forEach(t => {
-                const teamRef = doc(db, teamsPath(), t.id);
-                batch.set(teamRef, t);
-            });
-            await batch.commit();
+            localStorage.setItem('teams', JSON.stringify(state.teams));
+        };
+        const loadTeams = async () => {
+            const teams = localStorage.getItem('teams');
+            if (teams) state.teams = JSON.parse(teams);
         };
 
         const savePlayers = async (playersToSave) => {
@@ -1205,71 +793,6 @@
                 batch.set(playerRef, p);
             });
             await batch.commit();
-        };
-
-        const loadGameState = async () => {
-            if (!db || !userId) {
-                document.getElementById('loadingScreen').classList.add('hidden');
-                document.getElementById('startScreen').classList.remove('hidden');
-                return;
-            }
-            
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('loadingScreen').classList.remove('hidden');
-
-            const stateRef = doc(db, gameDataPath());
-            
-            try {
-                const stateDoc = await getDoc(stateRef);
-                if (!stateDoc.exists()) {
-                    console.log("No game state found, showing setup screen.");
-                    showSetupScreen();
-                    return;
-                }
-
-                const data = stateDoc.data();
-                Object.assign(state, data);
-                console.log("Game state loaded.");
-
-                onSnapshot(collection(db, teamsPath()), (querySnapshot) => {
-                    state.teams = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    renderUI();
-                });
-                onSnapshot(query(collection(db, playersPath()), where('league', '==', 'pro')), (querySnapshot) => {
-                    state.players = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    renderUI();
-                });
-                onSnapshot(query(collection(db, playersPath()), where('league', '==', 'highschool')), (querySnapshot) => {
-                    state.highSchoolPlayers = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    renderUI();
-                });
-                onSnapshot(query(collection(db, playersPath()), where('league', '==', 'college')), (querySnapshot) => {
-                    state.collegePlayers = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    renderUI();
-                });
-                onSnapshot(query(collection(db, staffPath()), where('teamId', '!=', null)), (querySnapshot) => {
-                    state.staff = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    renderUI();
-                });
-                onSnapshot(query(collection(db, staffPath()), where('teamId', '==', null)), (querySnapshot) => {
-                    state.availableStaff = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    renderUI();
-                });
-                onSnapshot(collection(db, draftPoolPath()), (querySnapshot) => {
-                    state.draftPool = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    renderUI();
-                });
-                onSnapshot(collection(db, historyPath()), (querySnapshot) => {
-                    state.historicalSeasons = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    renderUI();
-                });
-
-            } catch (error) {
-                console.error("Failed to load game state:", error);
-            } finally {
-                document.getElementById('loadingScreen').classList.add('hidden');
-                document.getElementById('gameContainer').classList.remove('hidden');
-            }
         };
 
         const loadFromUrl = async () => {
@@ -1396,22 +919,37 @@
             renderUI();
         };
 
-        const advanceWeek = async () => {
-            if (state.weeksSimulated >= 16) {
-                await simulateSeason();
+        async function initializeGame(leagueType) {
+            state.leagueType = leagueType;
+            const gameData = GameInitializer.initializeLeague(leagueType);
+            
+            Object.assign(state, gameData);
+            LocalStorage.save('gameState', state);
+            
+            renderUI();
+        }
+
+        async function advanceWeek() {
+            state.weeksSimulated++;
+            
+            // Simulate games for current week
+            const weekGames = state.schedule.filter(game => game.week === state.weeksSimulated);
+            weekGames.forEach(game => simulateGame(game.homeTeam, game.awayTeam));
+            
+            if (state.weeksSimulated >= 17) { // End of regular season
                 await enterOffseason();
-            } else {
-                const userTeam = state.teams.find(t => t.id === state.userTeamId);
-                const opponent = state.teams.find(t => t.id !== userTeam.id && t.roster.length > 0);
-                if (userTeam && opponent) {
-                    simulateGame(userTeam.id, opponent.id);
-                } else {
-                    console.log("Not enough teams to simulate a game.");
-                }
-                state.weeksSimulated++;
             }
-            await saveGameState();
-        };
+            
+            LocalStorage.save('gameState', state);
+            renderUI();
+        }
+
+        async function simMultipleWeeks(numWeeks) {
+            for (let i = 0; i < numWeeks; i++) {
+                if (state.weeksSimulated >= 17) break;
+                await advanceWeek();
+            }
+        }
 
         // --- Event Listeners ---
         document.addEventListener('DOMContentLoaded', async () => {
