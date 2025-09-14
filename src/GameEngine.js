@@ -1,6 +1,7 @@
 import LeagueManager from './managers/LeagueManager.js';
 import GameManager from './managers/GameManager.js';
 import StorageService from './services/StorageService.js';
+import Coach from './models/Coach.js';
 
 class GameEngine {
     constructor() {
@@ -101,6 +102,7 @@ class GameEngine {
             gameState: 'initializing',
             leagueType: null,
             userTeamId: null,
+            coach: null,
             teams: [],
             players: [],
             schedule: [],
@@ -109,6 +111,31 @@ class GameEngine {
             currentYear: new Date().getFullYear()
         };
         return true;
+    }
+
+    createCoach(coachData) {
+        this.state.coach = new Coach(coachData);
+        this.storageService.save(this.state);
+        return this.state.coach;
+    }
+
+    selectTeam(teamId) {
+        if (!this.state.teams.find(t => t.id === teamId)) {
+            throw new Error('Invalid team selection');
+        }
+        this.state.userTeamId = teamId;
+        if (this.state.coach) {
+            this.state.coach.assignTeam(teamId);
+        }
+        this.storageService.save(this.state);
+        return true;
+    }
+
+    getAvailableTeams() {
+        return this.state.teams.filter(team => 
+            team.league === this.state.leagueType && 
+            !this.state.coach?.teamId
+        );
     }
 }
 

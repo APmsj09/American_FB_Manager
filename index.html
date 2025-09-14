@@ -99,14 +99,29 @@
     </div>
 
     <!-- Game Setup Screen -->
+        <!-- Game Setup Screen -->
     <div id="setupScreen" class="fixed inset-0 flex flex-col items-center justify-center bg-gray-900 z-40 hidden">
         <h2 class="text-4xl font-extrabold text-neon-green mb-6">Game Setup</h2>
         <div class="bg-gray-800 rounded-lg p-8 shadow-xl max-w-xl w-full">
-            <h3 class="text-xl font-bold mb-4">Choose Your League</h3>
-            <div id="leagueSelection" class="space-y-4 mb-6">
-                <!-- Leagues will be populated here -->
-            </div>
-            <button id="startGameBtn" class="btn bg-green-600 hover:bg-green-700 text-white w-full">Start Game</button>
+            <form id="setupForm" class="space-y-6">
+                <div>
+                    <label class="block text-lg font-medium mb-2">Coach Name</label>
+                    <input type="text" id="coachName" required
+                           class="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                <div>
+                    <label class="block text-lg font-medium mb-2">Age</label>
+                    <input type="number" id="coachAge" min="25" max="70" value="35" required
+                           class="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                </div>
+                <div id="teamSelectionContainer" class="hidden">
+                    <label class="block text-lg font-medium mb-2">Select Your Team</label>
+                    <select id="teamSelection" required
+                            class="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </select>
+                </div>
+                <button type="submit" class="btn bg-green-600 hover:bg-green-700 w-full">Continue</button>
+            </form>
         </div>
     </div>
 
@@ -844,29 +859,19 @@
             }
         };
 
-        const showSetupScreen = () => {
+        window.showSetupScreen = async (leagueType) => {
+            document.getElementById('loadingScreen').classList.remove('hidden');
             document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('setupScreen').classList.remove('hidden');
-
-            const leagueSelectionDiv = document.getElementById('leagueSelection');
-            leagueSelectionDiv.innerHTML = '';
-            for (const key in state.leagues) {
-                if (key !== 'pro') continue;
-                const league = state.leagues[key];
-                const btn = document.createElement('button');
-                btn.className = 'w-full text-left px-6 py-4 rounded-lg bg-gray-700 hover:bg-gray-600 transition-colors font-semibold league-btn';
-                btn.textContent = `${league.name} (${league.teams} teams)`;
-                btn.dataset.league = key;
-                leagueSelectionDiv.appendChild(btn);
+            
+            try {
+                await game.initialize(leagueType);
+                document.getElementById('setupScreen').classList.remove('hidden');
+            } catch (error) {
+                console.error('Failed to initialize game:', error);
+                document.getElementById('startScreen').classList.remove('hidden');
+            } finally {
+                document.getElementById('loadingScreen').classList.add('hidden');
             }
-
-            document.querySelectorAll('.league-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.league-btn').forEach(b => b.classList.remove('ring-2', 'ring-green-500'));
-                    btn.classList.add('ring-2', 'ring-green-500');
-                    document.getElementById('startGameBtn').dataset.league = btn.dataset.league;
-                });
-            });
         };
 
         const startNewGame = async (leagueKey) => {
@@ -987,6 +992,36 @@
             });
             document.getElementById('closeStaffModalBtn').addEventListener('click', () => {
                 document.getElementById('staffModal').close();
+            });
+
+            // Setup form handling
+            document.getElementById('setupForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const coachName = document.getElementById('coachName').value;
+                const coachAge = parseInt(document.getElementById('coachAge').value);
+                const teamSelect = document.getElementById('teamSelection');
+
+                if (!teamSelect.value) {
+                    // Create coach if team not selected yet
+                    game.createCoach({ name: coachName, age: coachAge });
+                    
+                    // Show team selection
+                    const teams = game.getAvailableTeams();
+                    teamSelect.innerHTML = teams.map(team => 
+                        `<option value="${team.id}">${team.name}</option>`
+                    ).join('');
+                    
+                    document.getElementById('teamSelectionContainer').classList.remove('hidden');
+                } else {
+                    // Team selected, start game
+                    document.getElementById('loadingScreen').classList.remove('hidden');
+                    game.selectTeam(teamSelect.value);
+                    
+                    document.getElementById('setupScreen').classList.add('hidden');
+                    document.getElementById('gameContainer').classList.remove('hidden');
+                    renderUI();
+                    document.getElementById('loadingScreen').classList.add('hidden');
+                }
             });
         });
     </script>
