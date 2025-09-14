@@ -208,11 +208,10 @@
 
 
     <script type="module">
-        import { GameState } from './js/gameState.js';
-        import { LeagueInitializer } from './js/leagueInit.js';
-        import { GameLoop } from './js/gameLoop.js';
+        import GameEngine from './src/GameEngine.js';
 
-        let state = GameState.load();
+        // Initialize game engine
+        const game = new GameEngine();
 
         // Initialize new game
         async function startNewGame(leagueType) {
