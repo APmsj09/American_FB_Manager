@@ -34,7 +34,7 @@ class GameEngine {
             }
 
             // Initialize new league
-            const { teams, players } = this.leagueManager.initializeLeague(leagueType);
+            const { teams, players, coaches } = this.leagueManager.initializeLeague(leagueType);
             
             // Create schedule
             const schedule = this.leagueManager.generateSchedule(teams);
@@ -47,6 +47,7 @@ class GameEngine {
                 userTeamId,
                 teams,
                 players,
+                coaches,
                 schedule,
                 currentWeek: 0,
                 currentYear: new Date().getFullYear()

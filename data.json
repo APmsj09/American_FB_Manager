@@ -1,8 +1,7 @@
 {
-    "state": {
-        "currentYear": 2025,
-        "weeksSimulated": 0,
-        "userTeamId": "pro_team_0",
+    "leagues": {
+        "pro": {
+            "name": "Professional Football League",
         "teamBudget": 5000000,
         "gameState": "regularSeason",
         "draftRound": 1,

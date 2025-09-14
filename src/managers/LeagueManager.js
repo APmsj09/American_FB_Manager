@@ -1,5 +1,8 @@
 import Player from '../models/Player.js';
 import Team from '../models/Team.js';
+import Coach from '../models/Coach.js';
+import NameGenerator from '../utils/NameGenerator.js';
+import AttributeGenerator from '../utils/AttributeGenerator.js';
 
 class LeagueManager {
     constructor() {
@@ -31,11 +34,43 @@ class LeagueManager {
 
         const teams = this.generateTeams(config.teams, leagueType);
         const players = this.generatePlayers(teams, config);
+        const coaches = this.generateCoaches(teams, leagueType);
 
         return {
             teams,
-            players
+            players,
+            coaches
         };
+    }
+
+    generateCoaches(teams, leagueType) {
+        const coaches = [];
+        const leagueMinAge = {
+            'pro': 35,
+            'college': 30,
+            'highschool': 25
+        };
+        const leagueMaxAge = {
+            'pro': 70,
+            'college': 65,
+            'highschool': 60
+        };
+
+        teams.forEach(team => {
+            // Generate head coach
+            const coach = new Coach({
+                name: NameGenerator.generateFullName(),
+                age: Math.floor(Math.random() * (leagueMaxAge[leagueType] - leagueMinAge[leagueType])) + leagueMinAge[leagueType],
+                teamId: team.id,
+                experience: Math.floor(Math.random() * 20),
+                attributes: {
+                    leadership: Math.floor(Math.random() * 30) + 70,  // Head coaches have high leadership
+                    strategy: Math.floor(Math.random() * 40) + 60,
+                    recruiting: Math.floor(Math.random() * 40) + 60,
+                    development: Math.floor(Math.random() * 40) + 60
+                }
+            });
+            coaches.push(coach);
     }
 
     generateTeams(count, leagueType) {
@@ -52,23 +87,41 @@ class LeagueManager {
 
     generatePlayers(teams, config) {
         const players = [];
-        const firstNames = ['John', 'Mike', 'Tom', 'James', 'Robert'];
-        const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones'];
+        const positionNeeds = {
+            QB: 3, RB: 4, WR: 6, TE: 3, OL: 8, DL: 8, LB: 8, DB: 10
+        };
         
         teams.forEach(team => {
-            for (let i = 0; i < config.playersPerTeam; i++) {
+            // Generate players by position needs
+            Object.entries(positionNeeds).forEach(([position, count]) => {
+                for (let i = 0; i < count; i++) {
+                    const potential = AttributeGenerator.generatePotential();
+                    const player = new Player({
+                        name: NameGenerator.generateFullName(),
+                        position: position,
+                        age: Math.floor(Math.random() * (config.maxAge - config.minAge)) + config.minAge,
+                        teamId: team.id,
+                        league: team.league,
+                        attributes: AttributeGenerator.generateAttributes(position, potential)
+                    });
+                    players.push(player);
+                }
+            });
+
+            // Fill remaining roster spots with random positions
+            const currentCount = Object.values(positionNeeds).reduce((a, b) => a + b, 0);
+            const remainingSpots = config.playersPerTeam - currentCount;
+            
+            for (let i = 0; i < remainingSpots; i++) {
+                const position = Player.getValidPositions()[Math.floor(Math.random() * Player.getValidPositions().length)];
+                const potential = AttributeGenerator.generatePotential();
                 const player = new Player({
-                    name: `${firstNames[Math.floor(Math.random() * firstNames.length)]} ${lastNames[Math.floor(Math.random() * lastNames.length)]}`,
-                    position: Player.getValidPositions()[Math.floor(Math.random() * Player.getValidPositions().length)],
+                    name: NameGenerator.generateFullName(),
+                    position: position,
                     age: Math.floor(Math.random() * (config.maxAge - config.minAge)) + config.minAge,
                     teamId: team.id,
                     league: team.league,
-                    attributes: {
-                        speed: Math.floor(Math.random() * 50) + 50,
-                        strength: Math.floor(Math.random() * 50) + 50,
-                        agility: Math.floor(Math.random() * 50) + 50,
-                        awareness: Math.floor(Math.random() * 50) + 50
-                    }
+                    attributes: AttributeGenerator.generateAttributes(position, potential)
                 });
                 players.push(player);
             }
