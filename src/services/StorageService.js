@@ -5,7 +5,9 @@ class StorageService {
 
     save(state) {
         try {
-            const serializedState = JSON.stringify(state);
+            // Deep clone the state to prevent circular references
+            const stateToSave = JSON.parse(JSON.stringify(state));
+            const serializedState = JSON.stringify(stateToSave);
             localStorage.setItem(this.storageKey, serializedState);
             console.log('Game state saved successfully');
             return true;

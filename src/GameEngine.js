@@ -25,16 +25,20 @@ class GameEngine {
 
     async initialize(leagueType, userTeamId = null, progressCallback = null) {
         try {
+            this.state.gameState = 'initializing';
+            
             // Load saved state or create new league
             if (progressCallback) progressCallback(10, 'Checking for saved game...');
             const savedState = this.storageService.load();
             if (savedState) {
-                if (progressCallback) progressCallback(100, 'Loading saved game...');
+                Object.assign(this.state, savedState);
+                if (progressCallback) progressCallback(100, 'Game loaded successfully!');
+                this.state.gameState = 'ready';
                 return true;
             }
 
             // Initialize new league
-            if (progressCallback) progressCallback(20, 'Initializing league...');
+            if (progressCallback) progressCallback(20, 'Creating new league...');
             const { teams, players, coaches } = this.leagueManager.initializeLeague(leagueType);
             
             // Create schedule

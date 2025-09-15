@@ -64,13 +64,15 @@ class LeagueManager {
                 teamId: team.id,
                 experience: Math.floor(Math.random() * 20),
                 attributes: {
-                    leadership: Math.floor(Math.random() * 30) + 70,  // Head coaches have high leadership
+                    leadership: Math.floor(Math.random() * 30) + 70,
                     strategy: Math.floor(Math.random() * 40) + 60,
                     recruiting: Math.floor(Math.random() * 40) + 60,
                     development: Math.floor(Math.random() * 40) + 60
                 }
             });
             coaches.push(coach);
+        });
+        return coaches;
     }
 
     generateTeams(count, leagueType) {
@@ -83,7 +85,7 @@ class LeagueManager {
             }));
         }
         return teams;
-    }, // Add comma here since this appears to be part of an object literal
+    }
 
     generatePlayers(teams, config) {
         const players = [];
