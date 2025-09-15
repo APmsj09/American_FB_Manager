@@ -29,7 +29,7 @@ export default class GameEngine {
         };
     }
 
-    async initialize(isNewGame, coachData, teamId, progressCallback) {
+    async initialize(isNewGame, coachData, teamId, progressCallback, teamsData = null) {
         this.state.gameState = 'initializing';
         if (progressCallback) progressCallback(10, 'Starting up...');
         
@@ -53,7 +53,10 @@ export default class GameEngine {
         // New Game Initialization
         this.state = this.getInitialState(); 
         if (progressCallback) progressCallback(20, 'Generating league...');
-        const proTeamsData = allTeamsData.pro;
+        if (!teamsData) {
+            throw new Error('Teams data is required for new game initialization');
+        }
+        const proTeamsData = teamsData.pro;
         const { teams, players, coaches } = this.leagueManager.initializeLeague(proTeamsData);
         this.state.teams = teams;
         this.state.players = players;
