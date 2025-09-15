@@ -23,23 +23,26 @@ class GameEngine {
         };
     }
 
-    async initialize(leagueType, userTeamId = null) {
+    async initialize(leagueType, userTeamId = null, progressCallback = null) {
         try {
             // Load saved state or create new league
+            if (progressCallback) progressCallback(10, 'Checking for saved game...');
             const savedState = this.storageService.load();
             if (savedState) {
-                this.state = savedState;
-                console.log('Loaded saved game state');
+                if (progressCallback) progressCallback(100, 'Loading saved game...');
                 return true;
             }
 
             // Initialize new league
+            if (progressCallback) progressCallback(20, 'Initializing league...');
             const { teams, players, coaches } = this.leagueManager.initializeLeague(leagueType);
             
             // Create schedule
+            if (progressCallback) progressCallback(50, 'Generating season schedule...');
             const schedule = this.leagueManager.generateSchedule(teams);
 
             // Update state
+            if (progressCallback) progressCallback(75, 'Finalizing setup...');
             this.state = {
                 ...this.state,
                 gameState: 'ready',
@@ -54,7 +57,9 @@ class GameEngine {
             };
 
             // Save initial state
+            if (progressCallback) progressCallback(90, 'Saving game state...');
             this.storageService.save(this.state);
+            if (progressCallback) progressCallback(100, 'Setup complete!');
             return true;
         } catch (error) {
             console.error('Failed to initialize game:', error);

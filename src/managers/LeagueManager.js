@@ -83,7 +83,7 @@ class LeagueManager {
             }));
         }
         return teams;
-    }
+    }, // Add comma here since this appears to be part of an object literal
 
     generatePlayers(teams, config) {
         const players = [];

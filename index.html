@@ -76,10 +76,14 @@
 <body class="flex min-h-screen">
 
     <!-- Loading Screen -->
+        <!-- Loading Screen -->
     <div id="loadingScreen" class="fixed inset-0 flex items-center justify-center bg-gray-900 z-50">
         <div class="text-center">
-            <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-green-500"></div>
-            <p class="mt-4 text-xl font-bold">Initializing Game...</p>
+            <h2 class="text-4xl font-bold text-neon-green mb-4">Loading...</h2>
+            <div class="w-64 h-2 bg-gray-700 rounded-full overflow-hidden">
+                <div id="loadingProgress" class="h-full bg-neon-green transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <p id="loadingStatus" class="mt-2 text-gray-400">Initializing...</p>
         </div>
     </div>
 
