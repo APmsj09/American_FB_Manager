@@ -9,14 +9,19 @@ let allTeamsData = null; // Variable to store the loaded team data
 // Load teams data from data.json
 async function loadTeamsData() {
     try {
+        console.log('Attempting to load teams data...');
         const response = await fetch('/data.json');
+        console.log('Fetch response received:', response.status);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        allTeamsData = await response.json();
+        const data = await response.json();
+        console.log('Data loaded successfully:', Object.keys(data));
+        allTeamsData = data;
         return true;
     } catch (error) {
         console.error('Error loading teams data:', error);
+        alert('Failed to load team data: ' + error.message);
         return false;
     }
 }
@@ -129,11 +134,32 @@ const updateLoadingProgress = (percentage, status) => {
 };
 
 async function startGame(isNew, coachData, teamId) {
+    console.log('Starting game...', { isNew, teamId });
     showScreen('loadingScreen');
-    // Pass the loaded team data into the game engine for initialization
-    await game.initialize(isNew, coachData, teamId, allTeamsData, updateLoadingProgress);
-    showScreen('gameContainer');
-    renderUI();
+    
+    try {
+        // First load the teams data
+        console.log('Loading teams data...');
+        const dataLoaded = await loadTeamsData();
+        if (!dataLoaded) {
+            console.error('Failed to load teams data');
+            alert('Failed to load game data. Please try again.');
+            showScreen('startScreen');
+            return;
+        }
+        
+        console.log('Teams data loaded, initializing game...');
+        // Initialize the game with the loaded data
+        await game.initialize(isNew, coachData, teamId, updateLoadingProgress, allTeamsData);
+        console.log('Game initialized successfully');
+        
+        showScreen('gameContainer');
+        renderUI();
+    } catch (error) {
+        console.error('Error during game initialization:', error);
+        alert('An error occurred while starting the game: ' + error.message);
+        showScreen('startScreen');
+    }
 }
 
 async function loadGameFromStateObject(state) {
@@ -225,4 +251,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Start the game with all the collected info in one step
         await startGame(true, { name: coachName, age: coachAge }, teamId);
     });
-});

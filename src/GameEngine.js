@@ -30,6 +30,7 @@ export default class GameEngine {
     }
 
     async initialize(isNewGame, coachData, teamId, progressCallback, teamsData = null) {
+        console.log('GameEngine initialization started:', { isNewGame, teamId, hasTeamsData: !!teamsData });
         this.state.gameState = 'initializing';
         if (progressCallback) progressCallback(5, 'Initializing game engine...');
         
