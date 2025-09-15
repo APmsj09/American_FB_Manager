@@ -6,18 +6,17 @@ import AttributeGenerator from '../utils/AttributeGenerator.js';
 
 export default class LeagueManager {
     initializeLeague(teamsData) {
-        // Teams are now created from the loaded JSON data
         const teams = teamsData.map(data => new Team(data));
 
         const players = teams.flatMap(team =>
-            Array.from({ length: 25 }, () => {
+            Array.from({ length: 53 }, () => { // Pro teams have 53 players
                 const position = ['QB', 'WR', 'RB', 'TE', 'OL', 'DL', 'LB', 'DB'][Math.floor(Math.random() * 8)];
                 return new Player({
                     name: NameGenerator.generateFullName(),
                     position: position,
                     age: Math.floor(Math.random() * 10) + 22,
                     teamId: team.id,
-                    league: team.league,
+                    league: 'pro',
                     attributes: AttributeGenerator.generateAttributes(position)
                 });
             })
