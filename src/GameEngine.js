@@ -2,93 +2,76 @@ import LeagueManager from './managers/LeagueManager.js';
 import GameManager from './managers/GameManager.js';
 import StorageService from './services/StorageService.js';
 import Coach from './models/Coach.js';
+import Team from './models/Team.js';
+import Player from './models/Player.js';
 
-class GameEngine {
+export default class GameEngine {
     constructor() {
         this.leagueManager = new LeagueManager();
         this.gameManager = new GameManager();
         this.storageService = new StorageService();
-        
-        this.state = {
+        this.state = this.getInitialState();
+    }
+
+    getInitialState() {
+        return {
             view: 'home',
             gameState: 'initializing',
-            leagueType: null,
+            leagueType: 'pro',
             userTeamId: null,
             teams: [],
             players: [],
             schedule: [],
             history: [],
+            coaches: [],
             currentWeek: 0,
             currentYear: new Date().getFullYear()
         };
     }
 
-    async initialize(leagueType, userTeamId = null, progressCallback = null) {
-        try {
-            this.state.gameState = 'initializing';
-            
-            // Load saved state or create new league
-            if (progressCallback) progressCallback(10, 'Checking for saved game...');
+    async initialize(isNewGame, coachData, teamId, progressCallback) {
+        this.state.gameState = 'initializing';
+        if (progressCallback) progressCallback(10, 'Starting up...');
+        
+        if (!isNewGame) {
             const savedState = this.storageService.load();
-            
             if (savedState) {
-                if (progressCallback) progressCallback(50, 'Loading saved game...');
-                Object.assign(this.state, savedState);
-                if (progressCallback) progressCallback(100, 'Game loaded successfully!');
+                if (progressCallback) progressCallback(50, 'Loading saved data...');
+                this.state = savedState;
+                // Re-instantiate classes from plain objects
+                this.state.teams = this.state.teams.map(t => new Team(t));
+                this.state.players = this.state.players.map(p => new Player(p));
+                this.state.coaches = this.state.coaches.map(c => new Coach(c));
+                if (progressCallback) progressCallback(100, 'Load complete!');
                 this.state.gameState = 'ready';
-                return true;
+                return;
             }
-
-            // Initialize new league
-            if (progressCallback) progressCallback(20, 'Creating teams and players...');
-            const { teams, players, coaches } = this.leagueManager.initializeLeague(leagueType);
-            
-                        // Create schedule
-            if (progressCallback) progressCallback(60, 'Generating season schedule...');
-            const schedule = this.leagueManager.generateSchedule(teams);
-
-            // Update state
-            if (progressCallback) progressCallback(80, 'Finalizing game setup...');
-            this.state = {
-                ...this.state,
-                gameState: 'ready',
-                leagueType,
-                userTeamId,
-                teams,
-                players,
-                coaches,
-                schedule,
-                currentWeek: 0,
-                currentYear: new Date().getFullYear()
-            };
-
-            // Save initial state
-            if (progressCallback) progressCallback(90, 'Saving game state...');
-            this.storageService.save(this.state);
-            if (progressCallback) progressCallback(100, 'Setup complete!');
-            return true;
-        } catch (error) {
-            console.error('Failed to initialize game:', error);
-            return false;
         }
+
+        // New Game Initialization
+        this.state = this.getInitialState(); // Reset state
+        if (progressCallback) progressCallback(20, 'Generating league...');
+        const { teams, players, coaches } = this.leagueManager.initializeLeague('pro');
+        this.state.teams = teams;
+        this.state.players = players;
+        this.state.coaches = coaches;
+
+        if (progressCallback) progressCallback(60, 'Creating schedule...');
+        this.state.schedule = this.leagueManager.generateSchedule(teams);
+
+        if (progressCallback) progressCallback(80, 'Finalizing...');
+        this.state.coach = new Coach(coachData);
+        this.selectTeam(teamId);
+
+        this.state.gameState = 'ready';
+        this.saveGame();
+        if (progressCallback) progressCallback(100, 'Setup complete!');
     }
 
     async advanceWeek() {
-        try {
-            if (this.state.gameState !== 'ready') {
-                throw new Error('Game is not in ready state');
-            }
-
-            // Simulate games and update state
-            this.state = await this.gameManager.advanceWeek(this.state);
-            
-            // Save updated state
-            this.storageService.save(this.state);
-            return true;
-        } catch (error) {
-            console.error('Failed to advance week:', error);
-            return false;
-        }
+        if (this.state.gameState !== 'ready') return;
+        this.state = await this.gameManager.advanceWeek(this.state);
+        this.saveGame();
     }
 
     getStandings() {
@@ -104,51 +87,13 @@ class GameEngine {
     }
 
     saveGame() {
-        return this.storageService.save(this.state);
-    }
-
-    resetGame() {
-        this.storageService.reset();
-        this.state = {
-            view: 'home',
-            gameState: 'initializing',
-            leagueType: null,
-            userTeamId: null,
-            coach: null,
-            teams: [],
-            players: [],
-            schedule: [],
-            history: [],
-            currentWeek: 0,
-            currentYear: new Date().getFullYear()
-        };
-        return true;
-    }
-
-    createCoach(coachData) {
-        this.state.coach = new Coach(coachData);
         this.storageService.save(this.state);
-        return this.state.coach;
     }
 
     selectTeam(teamId) {
-        if (!this.state.teams.find(t => t.id === teamId)) {
-            throw new Error('Invalid team selection');
-        }
         this.state.userTeamId = teamId;
         if (this.state.coach) {
             this.state.coach.assignTeam(teamId);
         }
-        this.storageService.save(this.state);
-        return true;
-    }
-
-    getAvailableTeams() {
-        return this.state.teams.filter(team => 
-            team.league === this.state.leagueType && 
-            !this.state.coach?.teamId
-        );
     }
 }
-
-export default GameEngine;
