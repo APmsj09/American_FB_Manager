@@ -29,74 +29,68 @@ export default class GameEngine {
         };
     }
 
-    async initialize(isNewGame, coachData, teamId, progressCallback, teamsData = null) {
-        console.log('GameEngine initialization started:', { isNewGame, teamId, hasTeamsData: !!teamsData });
+    async initialize(isNewGame, coachData, teamId, allTeamsData, progressCallback) {
         this.state.gameState = 'initializing';
-        if (progressCallback) progressCallback(5, 'Initializing game engine...');
+        if (progressCallback) progressCallback(5, 'Initializing...', 'Preparing game engine');
         
         if (!isNewGame) {
-            if (progressCallback) progressCallback(10, 'Checking for saved game...');
+            if (progressCallback) progressCallback(10, 'Loading Game...', 'Checking for saved game');
             const savedState = this.storageService.load();
             if (savedState) {
-                if (progressCallback) progressCallback(20, 'Loading saved game data...');
+                if (progressCallback) progressCallback(20, 'Loading Game...', 'Loading saved game data');
                 this.state = savedState;
-                if (progressCallback) progressCallback(30, 'Restoring teams...');
+                if (progressCallback) progressCallback(30, 'Loading Game...', 'Restoring teams');
                 this.state.teams = this.state.teams.map(t => new Team(t));
-                if (progressCallback) progressCallback(50, 'Restoring players...');
+                if (progressCallback) progressCallback(50, 'Loading Game...', 'Restoring players');
                 this.state.players = this.state.players.map(p => new Player(p));
-                if (progressCallback) progressCallback(70, 'Restoring coaches...');
+                if (progressCallback) progressCallback(70, 'Loading Game...', 'Restoring coaches');
                 this.state.coaches = this.state.coaches.map(c => new Coach(c));
-                if (progressCallback) progressCallback(90, 'Finalizing game state...');
+                if (progressCallback) progressCallback(90, 'Loading Game...', 'Finalizing game state');
                 this.state.gameState = 'ready';
-                if (progressCallback) progressCallback(100, 'Load complete!');
+                if (progressCallback) progressCallback(100, 'Load Complete', 'Game loaded successfully!');
                 return;
             } else {
                 alert("No saved game found in local storage.");
+                // This should ideally reset the view to the start screen
                 return;
             }
         }
 
         // New Game Initialization
-        if (progressCallback) progressCallback(10, 'Starting new game initialization...');
+        if (progressCallback) progressCallback(10, 'New Game...', 'Starting new game initialization');
         this.state = this.getInitialState(); 
         
-        if (!teamsData) {
-            throw new Error('Teams data is required for new game initialization');
-        }
+        if (!allTeamsData) throw new Error('Teams data is required for new game initialization');
 
-        if (progressCallback) progressCallback(20, 'Loading team data...');
-        const proTeamsData = teamsData.pro;
+        if (progressCallback) progressCallback(20, 'New Game...', 'Loading team data');
+        const proTeamsData = allTeamsData.pro;
         
-        if (progressCallback) progressCallback(30, 'Creating teams...');
+        if (progressCallback) progressCallback(30, 'New Game...', 'Creating teams, players, and coaches');
         const { teams, players, coaches } = this.leagueManager.initializeLeague(proTeamsData);
         this.state.teams = teams;
-
-        if (progressCallback) progressCallback(40, 'Generating players...');
         this.state.players = players;
-
-        if (progressCallback) progressCallback(50, 'Assigning coaches...');
         this.state.coaches = coaches;
 
-        if (progressCallback) progressCallback(60, 'Generating season schedule...');
+        if (progressCallback) progressCallback(60, 'New Game...', 'Generating season schedule');
         this.state.schedule = this.leagueManager.generateSchedule(teams);
 
-        if (progressCallback) progressCallback(70, 'Creating head coach...');
+        if (progressCallback) progressCallback(70, 'New Game...', 'Creating your coach');
         this.state.coach = new Coach(coachData);
 
-        if (progressCallback) progressCallback(80, 'Assigning team...');
+        if (progressCallback) progressCallback(80, 'New Game...', 'Assigning your team');
         this.selectTeam(teamId);
 
-        if (progressCallback) progressCallback(90, 'Saving initial game state...');
+        if (progressCallback) progressCallback(90, 'New Game...', 'Saving initial game state');
         this.state.gameState = 'ready';
-        this.storageService.save(this.state); // Save to local storage on creation
+        this.storageService.save(this.state);
         
-        if (progressCallback) progressCallback(100, 'Setup complete!');
+        if (progressCallback) progressCallback(100, 'Setup Complete', 'Ready to play!');
     }
 
     async advanceWeek() {
         if (this.state.gameState !== 'ready') return;
         this.state = await this.gameManager.advanceWeek(this.state);
-        this.storageService.save(this.state); // Save to local storage after each week
+        this.storageService.save(this.state);
     }
 
     getStandings() {
