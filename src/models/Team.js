@@ -1,8 +1,14 @@
-// src/models/Team.js
 export default class Team {
     constructor(data = {}) {
         this.id = data.id || crypto.randomUUID();
-        this.name = data.name || '';
+        this.city = data.city || 'Unknown';
+        this.name = data.name || 'Team';
+        this.abbreviation = data.abbreviation || 'TM';
+        this.conference = data.conference || null;
+        this.division = data.division || null;
+        this.population = data.population || 0;
+        this.prestige = data.prestige || 50; // Default prestige
+        
         this.league = data.league || '';
         this.wins = data.wins || 0;
         this.losses = data.losses || 0;
@@ -20,14 +26,5 @@ export default class Team {
         this.wins = 0;
         this.losses = 0;
         this.ties = 0;
-    }
-
-    addToHistory(seasonData) {
-        this.history.push({
-            year: seasonData.year,
-            wins: this.wins,
-            losses: this.losses,
-            ties: this.ties
-        });
     }
 }
