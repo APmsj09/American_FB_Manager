@@ -39,7 +39,6 @@ export default class LeagueManager {
         for (let week = 1; week <= 17; week++) {
             const weekGames = [];
             let tempTeams = [...teams];
-            // Simple shuffling for variety each week
             tempTeams.sort(() => Math.random() - 0.5); 
             
             while (tempTeams.length > 1) {
