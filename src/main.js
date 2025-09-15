@@ -125,7 +125,7 @@ async function loadGameFromStateObject(state) {
 document.addEventListener('DOMContentLoaded', async () => {
     // Fetch team data as soon as the page loads
     try {
-        const response = await fetch('./teams.json');
+        const response = await fetch('https://raw.githubusercontent.com/APmsj09/American_FB_Manager/refs/heads/main/data.json');
         allTeamsData = await response.json();
         
         // Populate the team selection dropdown on the setup screen
