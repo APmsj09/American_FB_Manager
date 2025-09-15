@@ -39,7 +39,8 @@
         <h1 class="text-6xl font-extrabold text-neon-green mb-10">AFM</h1>
         <div class="space-y-4">
             <button id="newGameBtn" class="btn bg-green-600 hover:bg-green-700 text-white w-64">New Game</button>
-            <button id="loadGameBtn" class="btn bg-gray-700 hover:bg-gray-600 text-white w-64">Load Game</button>
+            <button id="loadGameBtn" class="btn bg-gray-700 hover:bg-gray-600 text-white w-64">Load from Local Storage</button>
+            <button id="loadFileBtn" class="btn bg-blue-600 hover:bg-blue-700 text-white w-64">Load from File</button>
         </div>
     </div>
 
@@ -68,13 +69,13 @@
         <aside id="sidebar" class="sidebar flex flex-col p-4 shadow-lg z-10">
             <h1 class="text-3xl font-bold text-neon-green mb-6">AFM</h1>
             <nav class="space-y-4 flex-grow">
-                 <button class="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-700" data-view="home">Home</button>
+                <button class="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-700" data-view="home">Home</button>
                 <button class="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-700" data-view="roster">Roster</button>
                 <button class="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-700" data-view="standings">Standings</button>
                 <button class="w-full text-left px-4 py-2 rounded-lg hover:bg-gray-700" data-view="schedule">Schedule</button>
             </nav>
             <div class="mt-auto pt-4 border-t border-gray-600">
-                <button id="saveGameBtn" class="w-full text-left px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700">Save Game</button>
+                <button id="saveGameBtn" class="w-full text-left px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700">Save Game to File</button>
             </div>
         </aside>
 
@@ -89,6 +90,8 @@
             <div id="viewContainer" class="w-full"></div>
         </main>
     </div>
+
+    <input type="file" id="fileInput" class="hidden" accept=".json">
 
     <script type="module" src="./src/main.js"></script>
 
