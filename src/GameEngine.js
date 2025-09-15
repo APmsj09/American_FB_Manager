@@ -38,18 +38,20 @@ export default class GameEngine {
             if (savedState) {
                 if (progressCallback) progressCallback(50, 'Loading saved data...');
                 this.state = savedState;
-                // Re-instantiate classes from plain objects
                 this.state.teams = this.state.teams.map(t => new Team(t));
                 this.state.players = this.state.players.map(p => new Player(p));
                 this.state.coaches = this.state.coaches.map(c => new Coach(c));
                 if (progressCallback) progressCallback(100, 'Load complete!');
                 this.state.gameState = 'ready';
                 return;
+            } else {
+                alert("No saved game found in local storage.");
+                return;
             }
         }
 
         // New Game Initialization
-        this.state = this.getInitialState(); // Reset state
+        this.state = this.getInitialState(); 
         if (progressCallback) progressCallback(20, 'Generating league...');
         const { teams, players, coaches } = this.leagueManager.initializeLeague('pro');
         this.state.teams = teams;
@@ -64,14 +66,14 @@ export default class GameEngine {
         this.selectTeam(teamId);
 
         this.state.gameState = 'ready';
-        this.saveGame();
+        this.storageService.save(this.state); // Save to local storage on creation
         if (progressCallback) progressCallback(100, 'Setup complete!');
     }
 
     async advanceWeek() {
         if (this.state.gameState !== 'ready') return;
         this.state = await this.gameManager.advanceWeek(this.state);
-        this.saveGame();
+        this.storageService.save(this.state); // Save to local storage after each week
     }
 
     getStandings() {
@@ -84,10 +86,6 @@ export default class GameEngine {
 
     getTeamPlayers(teamId) {
         return this.state.players.filter(player => player.teamId === teamId);
-    }
-
-    saveGame() {
-        this.storageService.save(this.state);
     }
 
     selectTeam(teamId) {
