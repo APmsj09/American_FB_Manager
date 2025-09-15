@@ -53,7 +53,8 @@ export default class GameEngine {
         // New Game Initialization
         this.state = this.getInitialState(); 
         if (progressCallback) progressCallback(20, 'Generating league...');
-        const { teams, players, coaches } = this.leagueManager.initializeLeague('pro');
+        const proTeamsData = allTeamsData.pro;
+        const { teams, players, coaches } = this.leagueManager.initializeLeague(proTeamsData);
         this.state.teams = teams;
         this.state.players = players;
         this.state.coaches = coaches;
