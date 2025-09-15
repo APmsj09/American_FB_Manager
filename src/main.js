@@ -1,17 +1,17 @@
 import GameEngine from './GameEngine.js';
-import LeagueManager from './managers/LeagueManager.js';
 import Player from './models/Player.js';
 import Team from './models/Team.js';
 import Coach from './models/Coach.js';
 
 const game = new GameEngine();
+let allTeamsData = null; // Variable to store the loaded team data
 
 // --- UI Rendering ---
 const renderUI = () => {
     if (game.state.gameState !== 'ready') return;
     
     const userTeam = game.getUserTeam();
-    document.getElementById('teamInfo').innerHTML = `<p class="text-lg font-bold">${userTeam?.name || 'No Team'}</p>`;
+    document.getElementById('teamInfo').innerHTML = `<p class="text-lg font-bold">${userTeam?.city || ''} ${userTeam?.name || 'No Team'}</p>`;
     document.getElementById('weekYearDisplay').textContent = `Week: ${game.state.currentWeek} | Year: ${game.state.currentYear}`;
     
     const view = game.state.view;
@@ -54,7 +54,7 @@ const renderStandings = () => {
                     </tr></thead>
                     <tbody>${standings.map(t => `
                         <tr class="border-t border-gray-700 ${t.id === game.state.userTeamId ? 'bg-green-900' : ''}">
-                            <td class="p-4">${t.name}</td><td class="p-4">${t.wins}</td><td class="p-4">${t.losses}</td><td class="p-4">${t.ties}</td>
+                            <td class="p-4">${t.city} ${t.name}</td><td class="p-4">${t.wins}</td><td class="p-4">${t.losses}</td><td class="p-4">${t.ties}</td>
                         </tr>`).join('')}
                     </tbody>
                 </table>
@@ -77,7 +77,7 @@ const renderSchedule = () => {
                         const opponentId = isHome ? g.awayTeam : g.homeTeam;
                         const opponent = game.state.teams.find(t => t.id === opponentId);
                         return `<tr class="border-t border-gray-700 ${g.week === game.state.currentWeek ? 'bg-blue-900' : ''}">
-                            <td class="p-4">${g.week}</td><td class="p-4">${opponent.name}</td><td class="p-4">${isHome ? 'Home' : 'Away'}</td>
+                            <td class="p-4">${g.week}</td><td class="p-4">${opponent.city} ${opponent.name}</td><td class="p-4">${isHome ? 'Home' : 'Away'}</td>
                         </tr>`
                     }).join('')}
                     </tbody>
@@ -101,13 +101,15 @@ const updateLoadingProgress = (percentage, status) => {
 
 async function startGame(isNew, coachData, teamId) {
     showScreen('loadingScreen');
-    await game.initialize(isNew, coachData, teamId, updateLoadingProgress);
+    // Pass the loaded team data into the game engine for initialization
+    await game.initialize(isNew, coachData, teamId, allTeamsData, updateLoadingProgress);
     showScreen('gameContainer');
     renderUI();
 }
 
 async function loadGameFromStateObject(state) {
     showScreen('loadingScreen');
+    // Manually load the state and re-hydrate the class instances
     game.state = state;
     game.state.teams = game.state.teams.map(t => new Team(t));
     game.state.players = game.state.players.map(p => new Player(p));
@@ -120,7 +122,22 @@ async function loadGameFromStateObject(state) {
 }
 
 // --- Event Listeners ---
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Fetch team data as soon as the page loads
+    try {
+        const response = await fetch('./teams.json');
+        allTeamsData = await response.json();
+        
+        // Populate the team selection dropdown on the setup screen
+        const teamSelect = document.getElementById('teamSelection');
+        const proTeams = allTeamsData.pro;
+        teamSelect.innerHTML = proTeams.map(team => `<option value="${team.id}">${team.city} ${team.name}</option>`).join('');
+    } catch (error) {
+        console.error("Failed to load team data:", error);
+        const teamSelect = document.getElementById('teamSelection');
+        teamSelect.innerHTML = `<option value="">Error loading teams</option>`;
+    }
+
     document.getElementById('newGameBtn').addEventListener('click', () => showScreen('setupScreen'));
     
     document.getElementById('loadGameBtn').addEventListener('click', () => {
@@ -164,26 +181,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- THIS EVENT LISTENER IS UPDATED TO FIX THE SETUP FLOW ---
     document.getElementById('setupForm').addEventListener('submit', async (e) => {
         e.preventDefault();
+        
         const coachName = document.getElementById('coachName').value;
         const coachAge = document.getElementById('coachAge').value;
-        const teamContainer = document.getElementById('teamSelectionContainer');
-
-        if (teamContainer.classList.contains('hidden')) {
-            // First Click: Just generate a temporary list of teams for the dropdown
-            const tempLeagueManager = new LeagueManager();
-            const { teams } = tempLeagueManager.initializeLeague('pro');
-            
-            const teamSelect = document.getElementById('teamSelection');
-            teamSelect.innerHTML = teams.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
-
-            teamContainer.classList.remove('hidden');
-        } else {
-            // Second Click: Now we start the game with all the selected info
-            const teamId = document.getElementById('teamSelection').value;
-            await startGame(true, { name: coachName, age: coachAge }, teamId);
+        const teamId = document.getElementById('teamSelection').value;
+        
+        if (!teamId) {
+            alert("Please select a team.");
+            return;
         }
+
+        // Start the game with all the collected info in one step
+        await startGame(true, { name: coachName, age: coachAge }, teamId);
     });
 });
