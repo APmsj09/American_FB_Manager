@@ -21,6 +21,9 @@ export default class GameEngine {
             userTeamId: null,
             teams: [],
             players: [],
+            staff: [],
+            availableStaff: [],
+            gameResults: {}, // e.g., { 1: [gameResult1, gameResult2], ... }
             schedule: [],
             history: [],
             coaches: [],
@@ -39,8 +42,12 @@ export default class GameEngine {
             if (savedState) {
                 if (progressCallback) progressCallback(20, 'Loading Game...', 'Loading saved game data');
                 this.state = savedState;
-                if (progressCallback) progressCallback(30, 'Loading Game...', 'Restoring teams');
-                this.state.teams = this.state.teams.map(t => new Team(t));
+                if (progressCallback) progressCallback(30, 'New Game...', 'Creating teams, players, and staff');
+                const { teams, players, coaches, availableStaff } = this.leagueManager.initializeLeague(allTeamsData.pro);
+                this.state.teams = teams;
+                this.state.players = players;
+                this.state.coaches = coaches;
+                this.state.availableStaff = availableStaff; // STORE aVAILABLE STAFF
                 if (progressCallback) progressCallback(50, 'Loading Game...', 'Restoring players');
                 this.state.players = this.state.players.map(p => new Player(p));
                 if (progressCallback) progressCallback(70, 'Loading Game...', 'Restoring coaches');
