@@ -1,3 +1,4 @@
+// src/models/Team.js
 export default class Team {
     constructor(data = {}) {
         this.id = data.id || crypto.randomUUID();
@@ -7,7 +8,12 @@ export default class Team {
         this.conference = data.conference || null;
         this.division = data.division || null;
         this.population = data.population || 0;
-        this.prestige = data.prestige || 50; // Default prestige
+        this.prestige = data.prestige || 50;
+        
+        // NEW PROPERTIES
+        this.budget = data.budget || 50000000; // $50 Million starting budget
+        // Depth chart stores player IDs, ordered by depth (starter, backup, etc.)
+        this.depthChart = data.depthChart || {}; // e.g., { QB: [playerId1, playerId2], ... }
         
         this.league = data.league || '';
         this.wins = data.wins || 0;
