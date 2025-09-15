@@ -10,7 +10,7 @@ let allTeamsData = null; // Variable to store the loaded team data
 async function loadTeamsData() {
     try {
         console.log('Attempting to load teams data...');
-        const response = await fetch('/data.json');
+        const response = await fetch('https://raw.githubusercontent.com/APmsj09/American_FB_Manager/main/data.json');
         console.log('Fetch response received:', response.status);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
