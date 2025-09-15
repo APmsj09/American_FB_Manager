@@ -1,4 +1,8 @@
 import GameEngine from './GameEngine.js';
+import LeagueManager from './managers/LeagueManager.js';
+import Player from './models/Player.js';
+import Team from './models/Team.js';
+import Coach from './models/Coach.js';
 
 const game = new GameEngine();
 
@@ -6,12 +10,10 @@ const game = new GameEngine();
 const renderUI = () => {
     if (game.state.gameState !== 'ready') return;
     
-    // Update Header
     const userTeam = game.getUserTeam();
     document.getElementById('teamInfo').innerHTML = `<p class="text-lg font-bold">${userTeam?.name || 'No Team'}</p>`;
     document.getElementById('weekYearDisplay').textContent = `Week: ${game.state.currentWeek} | Year: ${game.state.currentYear}`;
     
-    // Render current view
     const view = game.state.view;
     const viewContainer = document.getElementById('viewContainer');
     if (view === 'home') viewContainer.innerHTML = `<div class="bg-gray-800 p-6 rounded-lg"><h2>Welcome, Coach!</h2><p>Select a view from the sidebar.</p></div>`;
@@ -104,12 +106,46 @@ async function startGame(isNew, coachData, teamId) {
     renderUI();
 }
 
+async function loadGameFromStateObject(state) {
+    showScreen('loadingScreen');
+    game.state = state;
+    game.state.teams = game.state.teams.map(t => new Team(t));
+    game.state.players = game.state.players.map(p => new Player(p));
+    game.state.coaches = game.state.coaches.map(c => new Coach(c));
+    game.state.gameState = 'ready';
+    updateLoadingProgress(100, 'Load complete!');
+    
+    showScreen('gameContainer');
+    renderUI();
+}
+
 // --- Event Listeners ---
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('newGameBtn').addEventListener('click', () => showScreen('setupScreen'));
     
     document.getElementById('loadGameBtn').addEventListener('click', () => {
-        startGame(false);
+        startGame(false); // isNewGame = false, loads from localStorage
+    });
+
+    document.getElementById('loadFileBtn').addEventListener('click', () => {
+        document.getElementById('fileInput').click();
+    });
+
+    document.getElementById('fileInput').addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const state = JSON.parse(e.target.result);
+                loadGameFromStateObject(state);
+            } catch (error) {
+                alert('Error: Could not read or parse the save file.');
+                console.error('File load error:', error);
+            }
+        };
+        reader.readAsText(file);
     });
 
     document.getElementById('advanceWeekBtn').addEventListener('click', async () => {
@@ -118,8 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('saveGameBtn').addEventListener('click', () => {
-        game.saveGame();
-        alert('Game Saved!');
+        game.storageService.exportToFile(game.state);
     });
 
     document.querySelectorAll('[data-view]').forEach(btn => {
@@ -129,6 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // --- THIS EVENT LISTENER IS UPDATED TO FIX THE SETUP FLOW ---
     document.getElementById('setupForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const coachName = document.getElementById('coachName').value;
@@ -136,15 +172,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const teamContainer = document.getElementById('teamSelectionContainer');
 
         if (teamContainer.classList.contains('hidden')) {
-            // First step: create coach and show teams
-            await game.initialize(true, {name: coachName, age: coachAge}, null, ()=>{}); // Quick init to get teams
+            // First Click: Just generate a temporary list of teams for the dropdown
+            const tempLeagueManager = new LeagueManager();
+            const { teams } = tempLeagueManager.initializeLeague('pro');
+            
             const teamSelect = document.getElementById('teamSelection');
-            teamSelect.innerHTML = game.state.teams.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+            teamSelect.innerHTML = teams.map(t => `<option value="${t.id}">${t.name}</option>`).join('');
+
             teamContainer.classList.remove('hidden');
         } else {
-            // Second step: select team and start game
+            // Second Click: Now we start the game with all the selected info
             const teamId = document.getElementById('teamSelection').value;
-            await startGame(true, {name: coachName, age: coachAge}, teamId);
+            await startGame(true, { name: coachName, age: coachAge }, teamId);
         }
     });
 });
