@@ -1,28 +1,19 @@
-class GameManager {
-    constructor() {
-        this.currentWeek = 0;
-        this.currentYear = new Date().getFullYear();
-    }
-
+export default class GameManager {
     async advanceWeek(state) {
-        this.currentWeek++;
-        
-        if (this.currentWeek <= 17) {
-            await this.simulateGames(state);
+        state.currentWeek++;
+        if (state.currentWeek <= 17) {
+            this.simulateWeek(state);
         } else {
-            await this.endSeason(state);
+            this.endSeason(state);
         }
-        
         return state;
     }
 
-    async simulateGames(state) {
-        const weekGames = state.schedule[this.currentWeek - 1] || [];
-        
+    simulateWeek(state) {
+        const weekGames = state.schedule[state.currentWeek - 1] || [];
         weekGames.forEach(game => {
             const homeTeam = state.teams.find(t => t.id === game.homeTeam);
             const awayTeam = state.teams.find(t => t.id === game.awayTeam);
-            
             if (homeTeam && awayTeam) {
                 this.simulateGame(homeTeam, awayTeam);
             }
@@ -30,9 +21,9 @@ class GameManager {
     }
 
     simulateGame(homeTeam, awayTeam) {
-        const homeScore = Math.floor(Math.random() * 35);
-        const awayScore = Math.floor(Math.random() * 35);
-        
+        const homeScore = Math.floor(Math.random() * 40);
+        const awayScore = Math.floor(Math.random() * 40);
+
         if (homeScore > awayScore) {
             homeTeam.updateRecord('win');
             awayTeam.updateRecord('loss');
@@ -43,51 +34,23 @@ class GameManager {
             homeTeam.updateRecord('tie');
             awayTeam.updateRecord('tie');
         }
-
-        return {
-            homeTeam: homeTeam.id,
-            awayTeam: awayTeam.id,
-            homeScore,
-            awayScore
-        };
     }
 
-    async endSeason(state) {
-        // Record season history
-        const seasonRecord = {
-            year: this.currentYear,
-            teams: state.teams.map(team => ({
-                id: team.id,
-                name: team.name,
-                wins: team.wins,
-                losses: team.losses,
-                ties: team.ties
-            }))
-        };
+    endSeason(state) {
+        state.history.push({
+            year: state.currentYear,
+            teams: state.teams.map(t => ({ ...t }))
+        });
 
-        // Add season to history
-        state.history.push(seasonRecord);
-
-        // Update team histories and reset records
         state.teams.forEach(team => {
-            team.addToHistory(seasonRecord);
             team.resetRecord();
         });
 
-        // Reset for next season
-        this.currentWeek = 0;
-        this.currentYear++;
-
-        return state;
+        state.currentWeek = 0;
+        state.currentYear++;
     }
 
     getStandings(teams) {
-        return [...teams].sort((a, b) => {
-            const aWinPct = (a.wins + 0.5 * a.ties) / (a.wins + a.losses + a.ties);
-            const bWinPct = (b.wins + 0.5 * b.ties) / (b.wins + b.losses + b.ties);
-            return bWinPct - aWinPct;
-        });
+        return [...teams].sort((a, b) => b.wins - a.wins);
     }
 }
-
-export default GameManager;
