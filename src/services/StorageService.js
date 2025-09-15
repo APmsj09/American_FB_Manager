@@ -1,15 +1,13 @@
-class StorageService {
+// src/services/StorageService.js
+export default class StorageService {
     constructor() {
-        this.storageKey = 'gameState';
+        this.storageKey = 'afm_gameState';
     }
 
     save(state) {
         try {
-            // Deep clone the state to prevent circular references
-            const stateToSave = JSON.parse(JSON.stringify(state));
-            const serializedState = JSON.stringify(stateToSave);
-            localStorage.setItem(this.storageKey, serializedState);
-            console.log('Game state saved successfully');
+            localStorage.setItem(this.storageKey, JSON.stringify(state));
+            console.log('Game state saved.');
             return true;
         } catch (error) {
             console.error('Failed to save game state:', error);
@@ -18,45 +16,11 @@ class StorageService {
     }
 
     load() {
-        try {
-            const savedState = localStorage.getItem(this.storageKey);
-            return savedState ? JSON.parse(savedState) : null;
-        } catch (error) {
-            console.error('Failed to load game state:', error);
-            return null;
-        }
+        const savedState = localStorage.getItem(this.storageKey);
+        return savedState ? JSON.parse(savedState) : null;
     }
 
     reset() {
-        try {
-            localStorage.removeItem(this.storageKey);
-            console.log('Game state reset successfully');
-            return true;
-        } catch (error) {
-            console.error('Failed to reset game state:', error);
-            return false;
-        }
-    }
-
-    exportState() {
-        const state = this.load();
-        if (!state) return null;
-
-        const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
-        return URL.createObjectURL(blob);
-    }
-
-    async importState(jsonFile) {
-        try {
-            const text = await jsonFile.text();
-            const state = JSON.parse(text);
-            this.save(state);
-            return true;
-        } catch (error) {
-            console.error('Failed to import game state:', error);
-            return false;
-        }
+        localStorage.removeItem(this.storageKey);
     }
 }
-
-export default StorageService;
