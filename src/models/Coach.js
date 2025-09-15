@@ -1,49 +1,20 @@
-class Coach {
+// src/models/Player.js
+export default class Player {
     constructor(data = {}) {
         this.id = data.id || crypto.randomUUID();
         this.name = data.name || '';
-        this.age = data.age || 30;
-        this.experience = data.experience || 0;
+        this.position = data.position || 'N/A';
+        this.age = data.age || 21;
         this.teamId = data.teamId || null;
-        this.attributes = {
-            leadership: data.attributes?.leadership || 50,
-            strategy: data.attributes?.strategy || 50,
-            recruiting: data.attributes?.recruiting || 50,
-            development: data.attributes?.development || 50
-        };
-        this.history = data.history || [];
+        this.league = data.league || '';
+        this.attributes = data.attributes || {};
     }
 
-    updateAttributes(newAttributes) {
-        Object.assign(this.attributes, newAttributes);
-    }
-
-    assignTeam(teamId) {
-        this.teamId = teamId;
-    }
-
-    addSeasonToHistory(seasonData) {
-        this.history.push({
-            year: seasonData.year,
-            teamId: this.teamId,
-            wins: seasonData.wins,
-            losses: seasonData.losses,
-            ties: seasonData.ties
-        });
-        this.experience++;
-    }
-
-    toJSON() {
-        return {
-            id: this.id,
-            name: this.name,
-            age: this.age,
-            experience: this.experience,
-            teamId: this.teamId,
-            attributes: { ...this.attributes },
-            history: [...this.history]
-        };
+    getOverallRating() {
+        if (!this.attributes || Object.keys(this.attributes).length === 0) {
+            return 50;
+        }
+        const attrs = Object.values(this.attributes);
+        return Math.round(attrs.reduce((sum, val) => sum + val, 0) / attrs.length);
     }
 }
-
-export default Coach;
