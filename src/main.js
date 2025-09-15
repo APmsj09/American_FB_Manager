@@ -6,6 +6,21 @@ import Coach from './models/Coach.js';
 const game = new GameEngine();
 let allTeamsData = null; // Variable to store the loaded team data
 
+// Load teams data from data.json
+async function loadTeamsData() {
+    try {
+        const response = await fetch('/data.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        allTeamsData = await response.json();
+        return true;
+    } catch (error) {
+        console.error('Error loading teams data:', error);
+        return false;
+    }
+}
+
 // --- UI Rendering ---
 const renderUI = () => {
     if (game.state.gameState !== 'ready') return;
