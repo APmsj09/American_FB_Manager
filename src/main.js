@@ -6,26 +6,6 @@ import Coach from './models/Coach.js';
 const game = new GameEngine();
 let allTeamsData = null; // Variable to store the loaded team data
 
-// Load teams data from data.json
-async function loadTeamsData() {
-    try {
-        console.log('Attempting to load teams data...');
-        const response = await fetch('https://raw.githubusercontent.com/APmsj09/American_FB_Manager/refs/heads/main/data.json');
-        console.log('Fetch response received:', response.status);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log('Data loaded successfully:', Object.keys(data));
-        allTeamsData = data;
-        return true;
-    } catch (error) {
-        console.error('Error loading teams data:', error);
-        alert('Failed to load team data: ' + error.message);
-        return false;
-    }
-}
-
 // --- UI Rendering ---
 const renderUI = () => {
     if (game.state.gameState !== 'ready') return;
@@ -106,86 +86,40 @@ const renderSchedule = () => {
         </div>`;
 };
 
+
 // --- Loading and Initialization ---
 const showScreen = (screenId) => {
-    console.log('Showing screen:', screenId);
-    try {
-        ['loadingScreen', 'startScreen', 'setupScreen', 'gameContainer'].forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.classList.add('hidden');
-            } else {
-                console.error(`Element with id "${id}" not found`);
-            }
-        });
-        const targetScreen = document.getElementById(screenId);
-        if (targetScreen) {
-            targetScreen.classList.remove('hidden');
-        } else {
-            console.error(`Target screen "${screenId}" not found`);
-        }
-    } catch (error) {
-        console.error('Error showing screen:', error);
-    }
+    ['loadingScreen', 'startScreen', 'setupScreen', 'gameContainer'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+    });
+    document.getElementById(screenId).classList.remove('hidden');
 };
 
-const updateLoadingProgress = (percentage, status) => {
+const updateLoadingProgress = (percentage, status, details = '') => {
     const loadingBar = document.getElementById('loadingBar');
     const loadingStatus = document.getElementById('loadingStatus');
     const loadingDetails = document.getElementById('loadingDetails');
     
-    // Update the progress bar
-    loadingBar.style.width = `${percentage}%`;
-    
-    // Update the main status
-    loadingStatus.textContent = `${status} (${percentage}%)`;
-    
-    // Add more detailed information
-    if (percentage < 100) {
-        loadingDetails.textContent = `Please wait while we ${status.toLowerCase()}`;
-    } else {
-        loadingDetails.textContent = 'Game loaded successfully!';
-    }
+    if(loadingBar) loadingBar.style.width = `${percentage}%`;
+    if(loadingStatus) loadingStatus.textContent = `${status} (${percentage}%)`;
+    if(loadingDetails) loadingDetails.textContent = details || `Please wait...`;
 };
 
 async function startGame(isNew, coachData, teamId) {
-    console.log('Starting game...', { isNew, teamId });
     showScreen('loadingScreen');
-    
-    try {
-        // First load the teams data
-        console.log('Loading teams data...');
-        const dataLoaded = await loadTeamsData();
-        if (!dataLoaded) {
-            console.error('Failed to load teams data');
-            alert('Failed to load game data. Please try again.');
-            showScreen('startScreen');
-            return;
-        }
-        
-        console.log('Teams data loaded, initializing game...');
-        // Initialize the game with the loaded data
-        await game.initialize(isNew, coachData, teamId, updateLoadingProgress, allTeamsData);
-        console.log('Game initialized successfully');
-        
-        showScreen('gameContainer');
-        renderUI();
-    } catch (error) {
-        console.error('Error during game initialization:', error);
-        alert('An error occurred while starting the game: ' + error.message);
-        showScreen('startScreen');
-    }
+    await game.initialize(isNew, coachData, teamId, allTeamsData, updateLoadingProgress);
+    showScreen('gameContainer');
+    renderUI();
 }
 
 async function loadGameFromStateObject(state) {
     showScreen('loadingScreen');
-    // Manually load the state and re-hydrate the class instances
     game.state = state;
     game.state.teams = game.state.teams.map(t => new Team(t));
     game.state.players = game.state.players.map(p => new Player(p));
     game.state.coaches = game.state.coaches.map(c => new Coach(c));
     game.state.gameState = 'ready';
-    updateLoadingProgress(100, 'Load complete!');
+    updateLoadingProgress(100, 'Load Complete', 'Game loaded successfully!');
     
     showScreen('gameContainer');
     renderUI();
@@ -193,18 +127,12 @@ async function loadGameFromStateObject(state) {
 
 // --- Event Listeners ---
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('DOM Content Loaded - Fetching initial data...');
-    // Fetch team data as soon as the page loads
     try {
         const response = await fetch('https://raw.githubusercontent.com/APmsj09/American_FB_Manager/refs/heads/main/data.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        console.log('Data fetch response received:', response.status);
-        allTeamsData = await response.json();
-        console.log('Teams data loaded:', Object.keys(allTeamsData));
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         
-        // Populate the team selection dropdown on the setup screen
+        allTeamsData = await response.json();
+        
         const teamSelect = document.getElementById('teamSelection');
         const proTeams = allTeamsData.pro;
         teamSelect.innerHTML = proTeams.map(team => `<option value="${team.id}">${team.city} ${team.name}</option>`).join('');
@@ -212,22 +140,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Failed to load team data:", error);
         const teamSelect = document.getElementById('teamSelection');
         teamSelect.innerHTML = `<option value="">Error loading teams</option>`;
+        alert('Could not fetch team data from the source. Please check the console for details.');
     }
 
-    // Set up button click handlers
-    const newGameBtn = document.getElementById('newGameBtn');
-    if (newGameBtn) {
-        newGameBtn.addEventListener('click', () => {
-            console.log('New Game button clicked');
-            showScreen('setupScreen');
-        });
-    } else {
-        console.error('New Game button not found in DOM');
-    }
+    document.getElementById('newGameBtn').addEventListener('click', () => showScreen('setupScreen'));
     
     document.getElementById('loadGameBtn').addEventListener('click', () => {
-        console.log('Load Game button clicked');
-        startGame(false); // isNewGame = false, loads from localStorage
+        startGame(false);
     });
 
     document.getElementById('loadFileBtn').addEventListener('click', () => {
@@ -245,7 +164,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 loadGameFromStateObject(state);
             } catch (error) {
                 alert('Error: Could not read or parse the save file.');
-                console.error('File load error:', error);
             }
         };
         reader.readAsText(file);
@@ -269,35 +187,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('setupForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        console.log('Setup form submitted');
         
         const coachName = document.getElementById('coachName').value;
         const coachAge = document.getElementById('coachAge').value;
         const teamId = document.getElementById('teamSelection').value;
         
-        console.log('Form data:', { coachName, coachAge, teamId });
-        
-        if (!coachName.trim()) {
-            alert("Please enter a coach name.");
-            return;
-        }
-        
-        if (!coachAge || isNaN(coachAge) || coachAge < 25 || coachAge > 75) {
-            alert("Please enter a valid coach age (25-75).");
-            return;
-        }
-
         if (!teamId) {
             alert("Please select a team.");
             return;
         }
 
-        try {
-            console.log('Starting new game with form data');
-            // Start the game with all the collected info in one step
-            await startGame(true, { name: coachName, age: parseInt(coachAge) }, teamId);
-        } catch (error) {
-            console.error('Error starting game:', error);
-            alert('Failed to start game: ' + error.message);
-        }
+        await startGame(true, { name: coachName, age: coachAge }, teamId);
     });
+});
