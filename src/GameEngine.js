@@ -30,7 +30,9 @@ class GameEngine {
             // Load saved state or create new league
             if (progressCallback) progressCallback(10, 'Checking for saved game...');
             const savedState = this.storageService.load();
+            
             if (savedState) {
+                if (progressCallback) progressCallback(50, 'Loading saved game...');
                 Object.assign(this.state, savedState);
                 if (progressCallback) progressCallback(100, 'Game loaded successfully!');
                 this.state.gameState = 'ready';
@@ -38,15 +40,15 @@ class GameEngine {
             }
 
             // Initialize new league
-            if (progressCallback) progressCallback(20, 'Creating new league...');
+            if (progressCallback) progressCallback(20, 'Creating teams and players...');
             const { teams, players, coaches } = this.leagueManager.initializeLeague(leagueType);
             
-            // Create schedule
-            if (progressCallback) progressCallback(50, 'Generating season schedule...');
+                        // Create schedule
+            if (progressCallback) progressCallback(60, 'Generating season schedule...');
             const schedule = this.leagueManager.generateSchedule(teams);
 
             // Update state
-            if (progressCallback) progressCallback(75, 'Finalizing setup...');
+            if (progressCallback) progressCallback(80, 'Finalizing game setup...');
             this.state = {
                 ...this.state,
                 gameState: 'ready',
