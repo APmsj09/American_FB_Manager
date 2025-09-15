@@ -31,18 +31,23 @@ export default class GameEngine {
 
     async initialize(isNewGame, coachData, teamId, progressCallback, teamsData = null) {
         this.state.gameState = 'initializing';
-        if (progressCallback) progressCallback(10, 'Starting up...');
+        if (progressCallback) progressCallback(5, 'Initializing game engine...');
         
         if (!isNewGame) {
+            if (progressCallback) progressCallback(10, 'Checking for saved game...');
             const savedState = this.storageService.load();
             if (savedState) {
-                if (progressCallback) progressCallback(50, 'Loading saved data...');
+                if (progressCallback) progressCallback(20, 'Loading saved game data...');
                 this.state = savedState;
+                if (progressCallback) progressCallback(30, 'Restoring teams...');
                 this.state.teams = this.state.teams.map(t => new Team(t));
+                if (progressCallback) progressCallback(50, 'Restoring players...');
                 this.state.players = this.state.players.map(p => new Player(p));
+                if (progressCallback) progressCallback(70, 'Restoring coaches...');
                 this.state.coaches = this.state.coaches.map(c => new Coach(c));
-                if (progressCallback) progressCallback(100, 'Load complete!');
+                if (progressCallback) progressCallback(90, 'Finalizing game state...');
                 this.state.gameState = 'ready';
+                if (progressCallback) progressCallback(100, 'Load complete!');
                 return;
             } else {
                 alert("No saved game found in local storage.");
@@ -51,26 +56,39 @@ export default class GameEngine {
         }
 
         // New Game Initialization
+        if (progressCallback) progressCallback(10, 'Starting new game initialization...');
         this.state = this.getInitialState(); 
-        if (progressCallback) progressCallback(20, 'Generating league...');
+        
         if (!teamsData) {
             throw new Error('Teams data is required for new game initialization');
         }
+
+        if (progressCallback) progressCallback(20, 'Loading team data...');
         const proTeamsData = teamsData.pro;
+        
+        if (progressCallback) progressCallback(30, 'Creating teams...');
         const { teams, players, coaches } = this.leagueManager.initializeLeague(proTeamsData);
         this.state.teams = teams;
+
+        if (progressCallback) progressCallback(40, 'Generating players...');
         this.state.players = players;
+
+        if (progressCallback) progressCallback(50, 'Assigning coaches...');
         this.state.coaches = coaches;
 
-        if (progressCallback) progressCallback(60, 'Creating schedule...');
+        if (progressCallback) progressCallback(60, 'Generating season schedule...');
         this.state.schedule = this.leagueManager.generateSchedule(teams);
 
-        if (progressCallback) progressCallback(80, 'Finalizing...');
+        if (progressCallback) progressCallback(70, 'Creating head coach...');
         this.state.coach = new Coach(coachData);
+
+        if (progressCallback) progressCallback(80, 'Assigning team...');
         this.selectTeam(teamId);
 
+        if (progressCallback) progressCallback(90, 'Saving initial game state...');
         this.state.gameState = 'ready';
         this.storageService.save(this.state); // Save to local storage on creation
+        
         if (progressCallback) progressCallback(100, 'Setup complete!');
     }
 

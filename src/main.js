@@ -110,8 +110,22 @@ const showScreen = (screenId) => {
 };
 
 const updateLoadingProgress = (percentage, status) => {
-    document.getElementById('loadingBar').style.width = `${percentage}%`;
-    document.getElementById('loadingStatus').textContent = status;
+    const loadingBar = document.getElementById('loadingBar');
+    const loadingStatus = document.getElementById('loadingStatus');
+    const loadingDetails = document.getElementById('loadingDetails');
+    
+    // Update the progress bar
+    loadingBar.style.width = `${percentage}%`;
+    
+    // Update the main status
+    loadingStatus.textContent = `${status} (${percentage}%)`;
+    
+    // Add more detailed information
+    if (percentage < 100) {
+        loadingDetails.textContent = `Please wait while we ${status.toLowerCase()}`;
+    } else {
+        loadingDetails.textContent = 'Game loaded successfully!';
+    }
 };
 
 async function startGame(isNew, coachData, teamId) {
