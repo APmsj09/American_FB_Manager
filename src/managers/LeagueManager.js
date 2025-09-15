@@ -5,12 +5,9 @@ import NameGenerator from '../utils/NameGenerator.js';
 import AttributeGenerator from '../utils/AttributeGenerator.js';
 
 export default class LeagueManager {
-    initializeLeague(leagueType) {
-        const teams = Array.from({ length: 16 }, (_, i) => new Team({
-            id: `team_${i}`,
-            name: `Team ${i + 1}`,
-            league: leagueType
-        }));
+    initializeLeague(teamsData) {
+        // Teams are now created from the loaded JSON data
+        const teams = teamsData.map(data => new Team(data));
 
         const players = teams.flatMap(team =>
             Array.from({ length: 25 }, () => {
