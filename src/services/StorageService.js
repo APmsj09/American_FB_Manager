@@ -1,44 +1,46 @@
-// src/services/StorageService.js
-export default class StorageService {
-    constructor() {
-        this.storageKey = 'afm_gameState';
-    }
+const SAVE_KEY = 'american_fb_manager_save';
 
+export default class StorageService {
     save(state) {
         try {
-            localStorage.setItem(this.storageKey, JSON.stringify(state));
-            console.log('Game state saved to local storage.');
-            return true;
+            const stateString = JSON.stringify(state);
+            localStorage.setItem(SAVE_KEY, stateString);
+            console.log("Game saved successfully.");
         } catch (error) {
-            console.error('Failed to save game state:', error);
-            return false;
+            console.error("Error saving game state:", error);
         }
     }
 
     load() {
-        const savedState = localStorage.getItem(this.storageKey);
-        return savedState ? JSON.parse(savedState) : null;
-    }
-
-    reset() {
-        localStorage.removeItem(this.storageKey);
+        try {
+            const stateString = localStorage.getItem(SAVE_KEY);
+            if (stateString) {
+                console.log("Save game found.");
+                return JSON.parse(stateString);
+            }
+            console.log("No save game found.");
+            return null;
+        } catch (error) {
+            console.error("Error loading game state:", error);
+            return null;
+        }
     }
 
     exportToFile(state) {
         try {
-            const jsonString = JSON.stringify(state, null, 2);
-            const blob = new Blob([jsonString], { type: 'application/json' });
+            const stateString = JSON.stringify(state, null, 2);
+            const blob = new Blob([stateString], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `afm_save_${Date.now()}.json`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `fb_manager_save_${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            console.log('Game state exported successfully.');
+            console.log("Game exported to file successfully.");
         } catch (error) {
-            console.error('Failed to export game state:', error);
+            console.error("Error exporting game state to file:", error);
         }
     }
 }
