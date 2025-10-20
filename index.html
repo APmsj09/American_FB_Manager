@@ -25,7 +25,7 @@
 </head>
 <body class="flex min-h-screen">
 
-    <div id="loadingScreen" class="fixed inset-0 flex items-center justify-center bg-gray-900 z-50 hidden">
+    <div id="loadingScreen" class="fixed inset-0 flex items-center justify-center bg-gray-900 z-50">
         <div class="text-center">
             <h2 class="text-4xl font-bold text-green-500 mb-4">Loading Game</h2>
             <div class="w-64 h-2 bg-gray-700 rounded-full overflow-hidden mb-2">
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div id="startScreen" class="fixed inset-0 flex flex-col items-center justify-center bg-gray-900 z-40">
+    <div id="startScreen" class="fixed inset-0 flex flex-col items-center justify-center bg-gray-900 z-40 hidden">
         <h1 class="text-6xl font-extrabold text-neon-green mb-10">AFM</h1>
         <div class="space-y-4">
             <button id="newGameBtn" class="btn bg-green-600 hover:bg-green-700 text-white w-64">New Game</button>
@@ -88,8 +88,11 @@
             <div id="gameStatus" class="bg-gray-800 rounded-lg p-4 flex items-center justify-between w-full shadow-md">
                 <div id="teamInfo" class="flex-1"></div>
                 <div class="flex items-center gap-4">
-                    <div id="weekYearDisplay" class="text-xl"></div>
-                    <button id="advanceWeekBtn" class="btn bg-green-600 hover:bg-green-700">Advance Week</button>
+                    <div class="text-right">
+                        <div id="phaseDisplay" class="text-xl font-bold uppercase text-green-400"></div>
+                        <div id="weekYearDisplay" class="text-sm text-gray-400"></div>
+                    </div>
+                    <button id="advanceWeekBtn" class="btn bg-green-600 hover:bg-green-700">Advance</button>
                 </div>
             </div>
             <div id="viewContainer" class="w-full"></div>
@@ -102,3 +105,4 @@
 
 </body>
 </html>
+
