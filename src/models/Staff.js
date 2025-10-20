@@ -1,25 +1,29 @@
-// src/models/Staff.js
+import { v4 as uuidv4 } from 'uuid';
+
 export default class Staff {
-    constructor(data = {}) {
-        this.id = data.id || crypto.randomUUID();
-        this.name = data.name || 'No Name';
-        this.age = data.age || 45;
-        this.role = data.role || 'Assistant'; // e.g., Head Coach, Offensive Coordinator
-        this.salary = data.salary || 500000;
-
-        // Skills out of 100
-        this.skills = {
-            offense: data.skills?.offense || 50,
-            defense: data.skills?.defense || 50,
-            development: data.skills?.development || 50,
-            scouting: data.skills?.scouting || 50
+    constructor({ id, name, age, role, salary, skills, teamId = null }) {
+        this.id = id || uuidv4();
+        this.name = name;
+        this.age = age;
+        this.role = role; // e.g., 'Offensive Coordinator'
+        this.salary = salary;
+        this.skills = skills || { // { offense, defense, development, scouting }
+            offense: 50,
+            defense: 50,
+            development: 50,
+            scouting: 50,
         };
-
-        this.teamId = data.teamId || null; // null if they are a free agent
+        this.teamId = teamId; // null if a free agent
     }
 
-    getOverall() {
-        const skillValues = Object.values(this.skills);
-        return Math.round(skillValues.reduce((sum, val) => sum + val, 0) / skillValues.length);
+    getOverallRating() {
+        const relevantSkills = Object.values(this.skills);
+        if (relevantSkills.length === 0) return 30; // Default base rating
+        return Math.round(relevantSkills.reduce((a, b) => a + b, 0) / relevantSkills.length);
+    }
+
+    assignTeam(teamId) {
+        this.teamId = teamId;
     }
 }
+
