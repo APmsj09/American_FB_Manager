@@ -1,7 +1,6 @@
 export default class GameManager {
     async advanceWeek(state) {
         state.currentWeek++;
-        // NOTE: The preseason logic is handled inside simulateWeek
         this.simulateWeek(state);
 
         if (state.currentWeek > 17) { // End of Regular Season
@@ -15,16 +14,15 @@ export default class GameManager {
         const isPreseason = week <= 4;
         const weekGames = state.schedule[week - 1] || [];
         
-        state.gameResults[week] = []; // Initialize results for the week
+        state.gameResults[week] = [];
 
         weekGames.forEach(game => {
-            const homeTeam = state.teams.find(t => t.id === game.homeTeam);
-            const awayTeam = state.teams.find(t => t.id === game.awayTeam);
+            const homeTeam = state.teams.find(t => t.id === game.home.id);
+            const awayTeam = state.teams.find(t => t.id === game.away.id);
             if (homeTeam && awayTeam) {
                 const result = this.simulateGame(homeTeam, awayTeam, state.players);
                 state.gameResults[week].push(result);
 
-                // Only update the W/L record if it's not the preseason
                 if (!isPreseason) {
                     if (result.homeScore > result.awayScore) {
                         homeTeam.updateRecord('win');
@@ -42,12 +40,10 @@ export default class GameManager {
     }
 
     simulateGame(homeTeam, awayTeam, allPlayers) {
-        // Calculate team strength based on starters from the depth chart
         const homeOVR = this.calculateTeamOverall(homeTeam, allPlayers);
         const awayOVR = this.calculateTeamOverall(awayTeam, allPlayers);
 
-        // A simple sim engine: strength + randomness + home field advantage
-        const homeScore = Math.floor((homeOVR * 0.4) + (Math.random() * 35) + 3); // +3 for home field
+        const homeScore = Math.floor((homeOVR * 0.4) + (Math.random() * 35) + 3); // +3 home field advantage
         const awayScore = Math.floor((awayOVR * 0.4) + (Math.random() * 35));
         
         return {
@@ -64,7 +60,7 @@ export default class GameManager {
         const positions = ['QB', 'RB', 'WR', 'TE', 'OL', 'DL', 'LB', 'DB'];
 
         positions.forEach(pos => {
-            const starterId = team.depthChart[pos]?.[0];
+            const starterId = team.depthChart[pos]?.[0]; 
             if (starterId) {
                 const starter = allPlayers.find(p => p.id === starterId);
                 if (starter) {
@@ -74,9 +70,23 @@ export default class GameManager {
             }
         });
         
-        return starterCount > 0 ? totalRating / starterCount : 50; // Return 50 if no starters found
+        return starterCount > 0 ? totalRating / starterCount : 50; 
     }
 
-    endSeason(state) { /* ... no changes ... */ }
-    getStandings(teams) { /* ... no changes ... */ }
+    endSeason(state) {
+        console.log(`End of ${state.currentYear} season.`);
+        state.currentYear++;
+        state.currentWeek = 0;
+        state.teams.forEach(t => t.resetRecord());
+    }
+
+    getStandings(teams) {
+        return [...teams].sort((a, b) => {
+            if (b.wins !== a.wins) {
+                return b.wins - a.wins;
+            }
+            return a.losses - b.losses;
+        });
+    }
 }
+
