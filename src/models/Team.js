@@ -1,25 +1,13 @@
-// src/models/Team.js
 export default class Team {
-    constructor(data = {}) {
-        this.id = data.id || crypto.randomUUID();
-        this.city = data.city || 'Unknown';
-        this.name = data.name || 'Team';
-        this.abbreviation = data.abbreviation || 'TM';
-        this.conference = data.conference || null;
-        this.division = data.division || null;
-        this.population = data.population || 0;
-        this.prestige = data.prestige || 50;
-        
-        // NEW PROPERTIES
-        this.budget = data.budget || 50000000; // $50 Million starting budget
-        // Depth chart stores player IDs, ordered by depth (starter, backup, etc.)
-        this.depthChart = data.depthChart || {}; // e.g., { QB: [playerId1, playerId2], ... }
-        
-        this.league = data.league || '';
-        this.wins = data.wins || 0;
-        this.losses = data.losses || 0;
-        this.ties = data.ties || 0;
-        this.history = data.history || [];
+    constructor({ id, city, name, abbreviation, wins = 0, losses = 0, ties = 0, depthChart = {} }) {
+        this.id = id;
+        this.city = city;
+        this.name = name;
+        this.abbreviation = abbreviation;
+        this.wins = wins;
+        this.losses = losses;
+        this.ties = ties;
+        this.depthChart = depthChart; // e.g., { QB: [playerId1, playerId2], ... }
     }
 
     updateRecord(result) {
